@@ -30,9 +30,10 @@
   width: 50px;
   height: 50px;
   background-color: royalblue;
-  position: absolute;
+  position: relative;
   bottom: 10px;
   align-self: center;
+  /* left: 0; */
 }
 #stats-bar {
   width: 100%;

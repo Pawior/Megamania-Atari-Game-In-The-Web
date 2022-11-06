@@ -1,5 +1,4 @@
 import "./style.css";
-import typescriptLogo from "./typescript.svg";
 import { Game } from "./game";
 
 // document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
