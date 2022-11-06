@@ -47,7 +47,7 @@ export class Player {
     let style = window.getComputedStyle(this.playerHTML);
     let left = parseInt(style.getPropertyValue("left"));
     window.onkeydown = (e) => {
-      if (keystack.length < 10) {
+      if (keystack.length < 2) {
         keystack.push(e.which);
       }
     };
@@ -70,7 +70,7 @@ export class Player {
         left -= 5;
         // keystack.pop();
       } //left
-      else if (key === 68 && left < 200) {
+      if (key === 68 && left < 200) {
         console.log(left);
         console.log("prawa");
         this.playerHTML.style.left = left + "px";
@@ -84,6 +84,6 @@ export class Player {
 
     setInterval(() => {
       draw();
-    }, 1000 / 30);
+    }, 1000 / 50);
   }
 }
