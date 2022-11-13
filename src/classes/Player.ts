@@ -88,7 +88,11 @@ export class Player {
     }, 1000 / 24);
   }
   bestMovePlayer() {
-    let keys = {
+    interface Keys {
+      left: number;
+      right: number;
+    }
+    let keys: Keys = {
       left: 0,
       right: 0,
     };
@@ -104,20 +108,21 @@ export class Player {
     /// key detection (better to use addEventListener, but this will do)
     document.body.onkeyup = document.body.onkeydown = function (e) {
       let kc: number = e.keyCode || e.which;
-      keys[kc as keyof typeof keys] = e.type == "keydown"; // !BUG
+      // @ts-ignore:next-line
+      keys[kc as unknown as keyof Keys] = e.type == "keydown"; // !BUG
     };
 
     /// character movement update
 
     /// character control
     const detectCharacterMovement = () => {
-      if (keys[keys.left]) {
+      if (keys[keys.left as unknown as keyof Keys]) {
         this.playerHTML.style.left = left + "px";
-        left -= 5;
+        left -= 10;
       }
-      if (keys[keys.right]) {
+      if (keys[keys.right as unknown as keyof Keys]) {
         this.playerHTML.style.left = left + "px";
-        left += 5;
+        left += 10;
       }
     };
 
