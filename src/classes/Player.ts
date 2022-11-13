@@ -1,7 +1,7 @@
 export class Player {
-  playerHTML: HTMLDivElement | null;
+  playerHTML: HTMLDivElement;
   constructor() {
-    this.playerHTML = null;
+    this.playerHTML = <HTMLDivElement>document.createElement("div");
   }
   initialize() {
     this.spawnPlayer();
@@ -11,10 +11,10 @@ export class Player {
     const gameBoard: HTMLDivElement = document.querySelector(
       "#game-board"
     ) as HTMLDivElement;
-    let playerDiv = document.createElement("div");
-    playerDiv.id = "player";
-    gameBoard.appendChild(playerDiv);
-    this.playerHTML = playerDiv;
+    // let playerDiv = document.createElement("div");
+    this.playerHTML.id = "player";
+    gameBoard.appendChild(this.playerHTML);
+    // this.playerHTML = playerDiv;
   }
   movePlayer() {
     window.addEventListener("keydown", (e: KeyboardEvent) => {
@@ -88,11 +88,14 @@ export class Player {
     }, 1000 / 24);
   }
   bestMovePlayer() {
+    let keys = {
+      left: 0,
+      right: 0,
+    };
     console.log("ds");
     /// store key codes and currently pressed ones
-    var keys = {};
-    keys.LEFT = 65;
-    keys.RIGHT = 68;
+    keys.left = 65;
+    keys.right = 68;
     let style = window.getComputedStyle(this.playerHTML);
     let left = parseInt(style.getPropertyValue("left"));
 
@@ -100,19 +103,19 @@ export class Player {
 
     /// key detection (better to use addEventListener, but this will do)
     document.body.onkeyup = document.body.onkeydown = function (e) {
-      var kc = e.keyCode || e.which;
-      keys[kc] = e.type == "keydown";
+      let kc: number = e.keyCode || e.which;
+      keys[kc as keyof typeof keys] = e.type == "keydown"; // !BUG
     };
 
     /// character movement update
 
     /// character control
-    var detectCharacterMovement = () => {
-      if (keys[keys.LEFT]) {
+    const detectCharacterMovement = () => {
+      if (keys[keys.left]) {
         this.playerHTML.style.left = left + "px";
         left -= 5;
       }
-      if (keys[keys.RIGHT]) {
+      if (keys[keys.right]) {
         this.playerHTML.style.left = left + "px";
         left += 5;
       }
