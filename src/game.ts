@@ -1,6 +1,6 @@
 import { Player } from "./classes/Player";
 import { StatsBar } from "./classes/StatsBar";
-import { Alien } from "./classes/Alien";
+// import { Alien } from "./classes/Alien";
 import { ManageAliens } from "./functions/manageAliens";
 export const Game = () => {
   console.log("start the game");
@@ -9,6 +9,7 @@ export const Game = () => {
   let player = new Player();
   // player.spawnPlayer();
   player.initialize();
+  player.shooting();
   let statsBar = new StatsBar();
   statsBar.spawnStatsBar();
   ManageAliens();

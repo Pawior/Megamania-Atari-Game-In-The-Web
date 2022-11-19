@@ -16,77 +16,43 @@ export class Player {
     gameBoard.appendChild(this.playerHTML);
     // this.playerHTML = playerDiv;
   }
-  movePlayer() {
-    window.addEventListener("keydown", (e: KeyboardEvent) => {
-      console.log(e.key);
-      let style = window.getComputedStyle(this.playerHTML);
-      let left = parseInt(style.getPropertyValue("left"));
-      switch (e.key) {
-        case "a":
-          console.log("lewo");
-          left -= 5;
-          console.log(left);
-          this.playerHTML.style.left = left + "px";
-          break;
-        case "d":
-          left += 5;
-          this.playerHTML.style.left = left + "px";
-          console.log("prawo");
-          break;
-        default:
-          console.log("brak ruchu");
-          break;
+
+  shooting() {
+    // console.log(typeof bulletTopProp);
+    // bulletLeftProp = 10;
+
+    const gameBoard: HTMLDivElement = document.querySelector(
+      "#game-board"
+    ) as HTMLDivElement;
+    document.addEventListener("keyup", (event: KeyboardEvent) => {
+      let keyCode = event.code;
+      if (keyCode == "Space") {
+        let bullet: HTMLDivElement = document.createElement("div");
+        bullet.id = "bullet";
+
+        let bulletStyle = window.getComputedStyle(bullet);
+        let bulletTopProp = parseInt(bulletStyle.getPropertyValue("top"));
+        // let bulletLeftProp = parseInt(bulletStyle.getPropertyValue("left"));
+        bulletTopProp = 10;
+
+        let style = window.getComputedStyle(this.playerHTML);
+        let left = parseInt(style.getPropertyValue("left"));
+        bullet.style.left = left + "vw";
+
+        gameBoard.insertBefore(bullet, this.playerHTML);
+
+        setInterval(() => {
+          bulletTopProp--;
+          console.log(bulletTopProp);
+          bullet.style.top = `${bulletTopProp}vh`;
+
+          console.log(parseInt(bulletStyle.getPropertyValue("top")));
+        }, 1000 / 20);
       }
+      // if ( x)
     });
   }
-  betterMovePlayer() {
-    let keystack: [] = [];
-    let prevKey = 0;
-    let isMoving = 0;
-    let shouldCleaning = false;
 
-    let style = window.getComputedStyle(this.playerHTML);
-    let left = parseInt(style.getPropertyValue("left"));
-    window.onkeydown = (e) => {
-      keystack.push(e.which);
-    };
-
-    window.onkeyup = (e) => {
-      keystack.pop();
-    };
-
-    const draw = () => {
-      let key = keystack[keystack.length - 1];
-      console.log(keystack);
-      // if (!(isMoving == isMoving % 2)) {
-      //   key = keystack.pop();
-      // } else {
-      //   key = prevKey;
-      // }
-
-      console.log(shouldCleaning);
-      if (key === 65 && left > -200) {
-        console.log(left);
-        this.playerHTML.style.left = left + "px";
-        left -= 5;
-        // keystack.pop();
-      } //left
-      else if (key === 68 && left < 200) {
-        console.log(left);
-        console.log("prawa");
-        this.playerHTML.style.left = left + "px";
-        left += 5;
-        // keystack.pop();
-      } //right
-
-      prevKey = key;
-      isMoving++;
-    };
-
-    setInterval(() => {
-      draw();
-    }, 1000 / 24);
-  }
   bestMovePlayer() {
     interface Keys {
       left: number;

@@ -24,7 +24,7 @@ export class Alien {
     let style = window.getComputedStyle(this.alienHTML);
     let left = parseInt(style.getPropertyValue("left"));
     let top = parseInt(style.getPropertyValue("top"));
-    let incrementorHorizontalSum: number = 0;
+    // let incrementorHorizontalSum: number = 0;
     let incrementorHorizontal: number = 1;
     let incrementorVertical: number = 0.2;
 
@@ -35,7 +35,7 @@ export class Alien {
         incrementorHorizontal = 1;
       }
 
-      if (moveVerticalStep >= 69) {
+      if (moveVerticalStep >= 70) {
         moveVerticalStep = 0;
       }
 
