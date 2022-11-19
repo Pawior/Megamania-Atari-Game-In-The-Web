@@ -116,11 +116,11 @@ export class Player {
 
     /// character control
     const detectCharacterMovement = () => {
-      if (keys[keys.left as unknown as keyof Keys] && left > -49) {
+      if (keys[keys.left as unknown as keyof Keys] && left > -48) {
         this.playerHTML.style.left = left + "vw";
         left -= 1;
       }
-      if (keys[keys.right as unknown as keyof Keys] && left < 49) {
+      if (keys[keys.right as unknown as keyof Keys] && left < 48) {
         this.playerHTML.style.left = left + "vw";
         left += 1;
       }
