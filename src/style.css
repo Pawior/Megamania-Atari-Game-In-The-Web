@@ -14,6 +14,13 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
 }
+*,
+html,
+body {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
 #app {
   width: 100%;
   height: 100%;
@@ -23,27 +30,61 @@
   height: 80%;
   position: relative;
   display: flex;
-  flex-direction: row;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
   overflow: hidden;
+}
+#bullet-zone {
+  height: 50px;
+  /* align-self: flex-end; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+#player-zone {
+  height: 50px;
+  /* align-self: flex-end; */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  order: 1;
+  flex-shrink: 0;
 }
 #player {
   width: 50px;
-  height: 50px;
+  height: 100%;
   background-color: royalblue;
   position: relative;
-  bottom: 10px;
+  bottom: 0px;
   align-self: flex-end;
   /* left: 0; */
 }
-#bullet {
+.bullet {
   width: 5px;
   height: 20px;
+  /* left: 0px; */
   background-color: rgb(194, 194, 194);
-  position: relative;
+  position: absolute;
   z-index: 100;
-  /* bottom: 10px; */
-  align-self: flex-end;
+  bottom: 0;
+  margin: 10px;
+  align-self: center;
+  order: 0;
+  flex-shrink: 0;
+  position: absolute;
+  /* left: 50%;
+  transform: translate(-50%, 0); */
+  /* left: 0; */
+  /* margin-left: auto;
+  margin-right: auto; */
 }
 #stats-bar {
   width: 100%;

@@ -9,7 +9,7 @@ export class Player {
   }
   spawnPlayer() {
     const gameBoard: HTMLDivElement = document.querySelector(
-      "#game-board"
+      "#player-zone"
     ) as HTMLDivElement;
     // let playerDiv = document.createElement("div");
     this.playerHTML.id = "player";
@@ -24,29 +24,42 @@ export class Player {
     const gameBoard: HTMLDivElement = document.querySelector(
       "#game-board"
     ) as HTMLDivElement;
+
+    const bulletZone: HTMLDivElement = document.querySelector(
+      "#bullet-zone"
+    ) as HTMLDivElement;
+
     document.addEventListener("keyup", (event: KeyboardEvent) => {
       let keyCode = event.code;
       if (keyCode == "Space") {
         let bullet: HTMLDivElement = document.createElement("div");
-        bullet.id = "bullet";
+        bullet.classList.add("bullet");
 
+        // bullet.style.left = "50%";
         let bulletStyle = window.getComputedStyle(bullet);
-        let bulletTopProp = parseInt(bulletStyle.getPropertyValue("top"));
-        // let bulletLeftProp = parseInt(bulletStyle.getPropertyValue("left"));
-        bulletTopProp = 10;
+        let bulletLeft = parseInt(bulletStyle.getPropertyValue("left"));
 
+        let bulletBotProp = -2;
+
+        // Probably dont needed
         let style = window.getComputedStyle(this.playerHTML);
         let left = parseInt(style.getPropertyValue("left"));
-        bullet.style.left = left + "vw";
+        left += 0;
+        // bulletLeft + 0;
+        console.log(left);
+        console.log(bulletLeft);
+        console.log(bullet.style.left);
+        bullet.style.setProperty("left", `calc(50% + ${left}px)`);
 
-        gameBoard.insertBefore(bullet, this.playerHTML);
+        // gameBoard.insertBefore(bullet, this.playerHTML);
+        bulletZone.appendChild(bullet);
 
         setInterval(() => {
-          bulletTopProp--;
-          console.log(bulletTopProp);
-          bullet.style.top = `${bulletTopProp}vh`;
+          bulletBotProp++;
+          // console.log(bulletBotProp);
+          bullet.style.bottom = `${bulletBotProp}vh`;
 
-          console.log(parseInt(bulletStyle.getPropertyValue("top")));
+          // console.log(parseInt(bulletStyle.getPropertyValue("bottom")));
         }, 1000 / 20);
       }
       // if ( x)
@@ -62,7 +75,7 @@ export class Player {
       left: 0,
       right: 0,
     };
-    console.log("ds");
+    // console.log("ds");
     /// store key codes and currently pressed ones
     keys.left = 65;
     keys.right = 68;
@@ -73,9 +86,13 @@ export class Player {
 
     /// key detection (better to use addEventListener, but this will do)
     document.body.onkeyup = document.body.onkeydown = function (e) {
-      let kc: number = e.keyCode || e.which;
-      // @ts-ignore:next-line
-      keys[kc as unknown as keyof Keys] = e.type == "keydown"; // !BUG
+      // console.log(e.keyCode);
+      if (e.keyCode != 32) {
+        // console.log("dsf");
+        let kc: number = e.keyCode || e.which;
+        // @ts-ignore:next-line
+        keys[kc as unknown as keyof Keys] = e.type == "keydown"; // !BUG
+      }
     };
 
     /// character movement update
