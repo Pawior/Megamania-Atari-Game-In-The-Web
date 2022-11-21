@@ -1,4 +1,7 @@
+import { Bullet } from "./Bullet";
+
 export class Player {
+  // static playerTag
   playerHTML: HTMLDivElement;
   constructor() {
     this.playerHTML = <HTMLDivElement>document.createElement("div");
@@ -32,37 +35,10 @@ export class Player {
     document.addEventListener("keyup", (event: KeyboardEvent) => {
       let keyCode = event.code;
       if (keyCode == "Space") {
-        let bullet: HTMLDivElement = document.createElement("div");
-        bullet.classList.add("bullet");
-
-        // bullet.style.left = "50%";
-        let bulletStyle = window.getComputedStyle(bullet);
-        let bulletLeft = parseInt(bulletStyle.getPropertyValue("left"));
-
-        let bulletBotProp = -2;
-
-        // Probably dont needed
-        let style = window.getComputedStyle(this.playerHTML);
-        let left = parseInt(style.getPropertyValue("left"));
-        left += 0;
-        // bulletLeft + 0;
-        console.log(left);
-        console.log(bulletLeft);
-        console.log(bullet.style.left);
-        bullet.style.setProperty("left", `calc(50% + ${left}px)`);
-
-        // gameBoard.insertBefore(bullet, this.playerHTML);
-        bulletZone.appendChild(bullet);
-
-        setInterval(() => {
-          bulletBotProp++;
-          // console.log(bulletBotProp);
-          bullet.style.bottom = `${bulletBotProp}vh`;
-
-          // console.log(parseInt(bulletStyle.getPropertyValue("bottom")));
-        }, 1000 / 20);
+        let bulletClass = new Bullet();
+        bulletClass.spawnBullet(this.playerHTML);
+        // bulletClass.checkCollision();
       }
-      // if ( x)
     });
   }
 

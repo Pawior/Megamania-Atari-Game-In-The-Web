@@ -1,13 +1,13 @@
 import { Alien } from "../classes/Alien";
 
+let aliensArr: Alien[] = [];
 export const ManageAliens = (): void => {
   let aliensAmount: number = 8;
-  let aliensArr: Alien[] = [];
 
   const spawnAliens = (): void => {
     for (let i = 0; i < aliensAmount; i++) {
       console.log("robie aliena");
-      let alien = new Alien("img", i * 1.6);
+      let alien = new Alien("img", i * 2.5);
       aliensArr.push(alien);
       alien.spawnAlien();
     }
@@ -21,3 +21,5 @@ export const ManageAliens = (): void => {
   spawnAliens();
   moveAliens();
 };
+
+export { aliensArr };

@@ -2,6 +2,7 @@ import { Player } from "./classes/Player";
 import { StatsBar } from "./classes/StatsBar";
 // import { Alien } from "./classes/Alien";
 import { ManageAliens } from "./functions/manageAliens";
+import { CollisonChecker } from "./functions/collisionChecker";
 export const Game = () => {
   console.log("start the game");
   // let alien = new Alien("img", 100);
@@ -13,4 +14,5 @@ export const Game = () => {
   let statsBar = new StatsBar();
   statsBar.spawnStatsBar();
   ManageAliens();
+  // CollisonChecker();
 };
