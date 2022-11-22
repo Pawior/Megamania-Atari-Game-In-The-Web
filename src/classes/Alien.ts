@@ -26,7 +26,7 @@ export class Alien {
     let top = parseInt(style.getPropertyValue("top"));
     // let incrementorHorizontalSum: number = 0;
     let incrementorHorizontal: number = 1;
-    let incrementorVertical: number = 0.2;
+    let incrementorVertical: number = 0.1;
 
     const checkMaxIncrement = () => {
       if (moveHorizontalStep > 30) {

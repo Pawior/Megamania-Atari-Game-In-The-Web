@@ -1,4 +1,4 @@
-import "./style.css";
+import "./style.scss";
 import { Game } from "./game";
 
 // document.querySelector<HTMLDivElement>("#app")!.innerHTML = `

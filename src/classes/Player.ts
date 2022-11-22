@@ -1,4 +1,6 @@
 import { Bullet } from "./Bullet";
+import { CollisonChecker } from "../functions/collisionChecker";
+import { StatsBar } from "./StatsBar";
 
 export class Player {
   // static playerTag
@@ -32,14 +34,24 @@ export class Player {
       "#bullet-zone"
     ) as HTMLDivElement;
 
+    let spamBullet = true;
     document.addEventListener("keyup", (event: KeyboardEvent) => {
       let keyCode = event.code;
-      if (keyCode == "Space") {
+      if (keyCode == "Space" && spamBullet) {
+        spamBullet = false;
+        console.log(spamBullet);
         let bulletClass = new Bullet();
         bulletClass.spawnBullet(this.playerHTML);
+        setTimeout(() => {
+          spamBullet = true;
+        }, 250);
         // bulletClass.checkCollision();
       }
     });
+  }
+
+  checkCollision() {
+    CollisonChecker(this.playerHTML);
   }
 
   bestMovePlayer() {
@@ -84,10 +96,13 @@ export class Player {
         left += 1;
       }
     };
-
     /// game loop
     setInterval(function () {
       detectCharacterMovement();
     }, 1000 / 24);
+  }
+  initializeStatsBar() {
+    let statsBar = new StatsBar();
+    statsBar.spawnStatsBar();
   }
 }

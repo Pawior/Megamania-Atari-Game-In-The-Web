@@ -1,6 +1,6 @@
 import { aliensArr } from "./manageAliens";
 export const CollisonChecker = (bullet: HTMLDivElement): void => {
-  console.log(aliensArr);
+  // console.log(aliensArr);
   aliensArr.forEach((alien, idx) => {
     let alienPos = alien.alienHTML.getBoundingClientRect();
 
