@@ -2,7 +2,7 @@ import { Player } from "./Player";
 
 export class StatsBar {
   hp: number;
-  player: Player;
+  // player: Player;
   statsBarHTML: HTMLDivElement = document.querySelector(
     "#stats-bar"
   ) as HTMLDivElement;
@@ -10,9 +10,9 @@ export class StatsBar {
     "#stats-bar_health-bar"
   ) as HTMLDivElement;
 
-  constructor(player: Player) {
-    this.hp = 100;
-    this.player = player;
+  constructor() {
+    this.hp = 3;
+    // this.player = player;
   }
   spawnStatsBar() {
     const app: HTMLDivElement = document.querySelector(
@@ -22,5 +22,13 @@ export class StatsBar {
     // statsBarDiv.id = "stats-bar";
     // app.appendChild(statsBarDiv);
   }
-  updateHealth() {}
+  updateHealthBar() {
+    this.healthBarHTML.replaceChildren();
+    console.log("robie");
+    for (let i = 0; i < this.hp; i++) {
+      let healthDiv = document.createElement("div");
+      healthDiv.classList.add("stats-bar_health-bar_heart");
+      this.healthBarHTML.appendChild(healthDiv);
+    }
+  }
 }

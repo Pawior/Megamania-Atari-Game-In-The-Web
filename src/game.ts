@@ -11,8 +11,8 @@ export const Game = () => {
   // player.spawnPlayer();
   player.initialize();
   player.shooting();
-  let statsBar = new StatsBar(player);
-  statsBar.spawnStatsBar();
+  // let statsBar = new StatsBar(player);
+  // statsBar.spawnStatsBar();
   ManageAliens();
   // CollisonChecker();
 };

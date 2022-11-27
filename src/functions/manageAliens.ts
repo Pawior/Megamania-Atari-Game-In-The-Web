@@ -21,5 +21,34 @@ export const ManageAliens = (): void => {
   spawnAliens();
   moveAliens();
 };
+export const resetAliens = (): void => {
+  // let restAliens = document.querySelectorAll(".alien");
+  // for (let i = 0; i < restAliens.length; i++) {
+  //   restAliens[i].remove();
+  // }
+
+  // for (let i = 0; i < aliensArr.length; i++) {
+  //   console.log("robie aliena");
+  //   let alien = new Alien("img", i * 2.5);
+  //   alien.spawnAlien();
+  //   alien.standardMove();
+  // }
+
+  const respawnAliens = () => {
+    aliensArr.forEach((alien) => {
+      alien.respawnAlien();
+      console.log("przemieszczam");
+      alien.standardMove();
+    });
+  };
+  respawnAliens();
+  // for (let i = 0; i < aliensArr.length; i++) {
+  //   aliensArr[i].standardMove();
+  // }
+  // aliensArr.forEach((alien: Alien) => {
+  //   console.log();
+  //   alien.standardMove();
+  // });
+};
 
 export { aliensArr };

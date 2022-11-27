@@ -1,6 +1,7 @@
 import { aliensArr } from "./manageAliens";
-export const CollisonChecker = (bullet: HTMLDivElement): void => {
+export const CollisonChecker = (passedDiv: HTMLDivElement): boolean => {
   // console.log(aliensArr);
+  let collisionToReturn = false;
   aliensArr.forEach((alien, idx) => {
     let alienPos = alien.alienHTML.getBoundingClientRect();
 
@@ -9,11 +10,11 @@ export const CollisonChecker = (bullet: HTMLDivElement): void => {
     let div1Right = alienPos.right;
     let div1Bottom = alienPos.bottom;
 
-    let bulletPos = bullet.getBoundingClientRect();
-    let div2Top = bulletPos.top;
-    let div2Left = bulletPos.left;
-    let div2Right = bulletPos.right;
-    let div2Bottom = bulletPos.bottom;
+    let passedDivPos = passedDiv.getBoundingClientRect();
+    let div2Top = passedDivPos.top;
+    let div2Left = passedDivPos.left;
+    let div2Right = passedDivPos.right;
+    let div2Bottom = passedDivPos.bottom;
 
     let verticalMatch;
     if (
@@ -36,10 +37,15 @@ export const CollisonChecker = (bullet: HTMLDivElement): void => {
     }
 
     if (horizontalMatch && verticalMatch) {
+      console.log(passedDiv);
       //   let intersect = true;
+      if (passedDiv.className == "bullet") {
+        alien.alienHTML.remove();
+        aliensArr.splice(idx, 1);
+      }
       console.log("kolizja!!! Juhu");
-      alien.alienHTML.remove();
-      aliensArr.splice(idx, 1);
+      collisionToReturn = true;
     }
   });
+  return collisionToReturn;
 };

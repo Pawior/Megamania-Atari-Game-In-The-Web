@@ -2,7 +2,7 @@ export class Alien {
   alienHTML: HTMLDivElement;
   bgImage: any;
   startLeft: number;
-
+  intervalMove: any;
   constructor(bgImage: any, startLeft: number) {
     this.alienHTML = document.createElement("div");
     this.bgImage = bgImage;
@@ -14,9 +14,19 @@ export class Alien {
       "#game-board"
     ) as HTMLDivElement;
     this.alienHTML = document.createElement("div");
-    this.alienHTML.id = "alien";
+    this.alienHTML.classList.add("alien");
     this.alienHTML.style.left = this.startLeft + "vw";
     gameBoard.appendChild(this.alienHTML);
+  }
+  respawnAlien() {
+    clearInterval(this.intervalMove);
+    this.alienHTML.style.top = 10 + "px";
+    this.alienHTML.style.left = this.startLeft + "vw";
+    this.alienHTML.style.display = "none";
+    setTimeout(() => {
+      this.alienHTML.style.display = "block";
+    }, 50);
+    // this.standardMove();
   }
   standardMove() {
     let moveHorizontalStep: number = 0;
@@ -26,7 +36,7 @@ export class Alien {
     let top = parseInt(style.getPropertyValue("top"));
     // let incrementorHorizontalSum: number = 0;
     let incrementorHorizontal: number = 1;
-    let incrementorVertical: number = 0.1;
+    let incrementorVertical: number = 1;
 
     const checkMaxIncrement = () => {
       if (moveHorizontalStep > 30) {
@@ -49,7 +59,7 @@ export class Alien {
       // }
     };
 
-    setInterval(() => {
+    this.intervalMove = setInterval(() => {
       moveHorizontalStep += incrementorHorizontal;
       moveVerticalStep += incrementorVertical;
       checkMaxIncrement();

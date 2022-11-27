@@ -1,16 +1,20 @@
 import { Bullet } from "./Bullet";
 import { CollisonChecker } from "../functions/collisionChecker";
 import { StatsBar } from "./StatsBar";
+import { resetAliens } from "../functions/manageAliens";
 
 export class Player {
   // static playerTag
   playerHTML: HTMLDivElement;
+  statsBar: StatsBar;
   constructor() {
     this.playerHTML = <HTMLDivElement>document.createElement("div");
+    this.statsBar = new StatsBar();
   }
   initialize() {
     this.spawnPlayer();
     this.bestMovePlayer();
+    this.initializeStatsBar();
   }
   spawnPlayer() {
     const gameBoard: HTMLDivElement = document.querySelector(
@@ -20,6 +24,7 @@ export class Player {
     this.playerHTML.id = "player";
     gameBoard.appendChild(this.playerHTML);
     // this.playerHTML = playerDiv;
+    this.checkCollision();
   }
 
   shooting() {
@@ -51,7 +56,25 @@ export class Player {
   }
 
   checkCollision() {
-    CollisonChecker(this.playerHTML);
+    let collisionBlock = false;
+    setInterval(() => {
+      let doesCollided = CollisonChecker(this.playerHTML);
+
+      if (doesCollided && collisionBlock == false) {
+        this.hurtPlayer();
+        collisionBlock = true;
+        setTimeout(() => {
+          collisionBlock = false;
+        }, 2000);
+      }
+    }, 1000 / 30);
+  }
+
+  hurtPlayer() {
+    this.statsBar.hp--;
+    this.statsBar.updateHealthBar();
+    console.log(this.statsBar);
+    resetAliens();
   }
 
   bestMovePlayer() {
@@ -102,7 +125,8 @@ export class Player {
     }, 1000 / 24);
   }
   initializeStatsBar() {
-    let statsBar = new StatsBar();
-    statsBar.spawnStatsBar();
+    // let statsBar = new StatsBar();
+    this.statsBar.spawnStatsBar();
+    this.statsBar.updateHealthBar();
   }
 }
