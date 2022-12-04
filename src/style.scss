@@ -99,22 +99,29 @@ body {
   /* margin-left: auto;
   margin-right: auto; */
 }
-#stats-bar_enery-bar_img {
-  width: 50vw;
-  height: 4.5vh;
-  margin-left: 7px;
-  background-image: url(../img/energy-bar2.png);
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-size: contain;
-  position: relative;
-  &_filled {
-    position: absolute;
-    width: 100%;
-    height: 20px;
-    // background-color: yellowgreen;
-  }
-}
+// #stats-bar_enery-bar_img {
+//   width: 50vw;
+//   height: 4.5vh;
+//   margin-left: 7px;
+//   background-image: url(../img/energy-barTransparent.png);
+//   background-position: center center;
+//   background-repeat: no-repeat;
+//   background-size: contain;
+//   position: relative;
+//   display: block;
+
+//   z-index: 99;
+//   &:before {
+//     content: "";
+//     display: block;
+
+//     position: absolute;
+//     z-index: -1;
+//     width: 100%;
+//     height: 20px;
+//     background-color: yellowgreen;
+//   }
+// }
 #stats-bar {
   width: 100%;
   height: 16vh;
@@ -122,11 +129,46 @@ body {
   display: flex;
   flex-direction: column;
   padding-top: 4px;
+  position: relative;
   &_energy-bar {
     height: 40%;
     display: flex;
     justify-content: center;
+    z-index: 2;
+    position: relative;
+    // &:before {
+    //   content: "";
+    //   display: block;
 
+    //   position: absolute;
+    //   z-index: 10;
+    //   width: 60%;
+    //   height: 20px;
+    //   background-color: yellowgreen;
+    // }
+    &_img {
+      width: 60vw;
+      height: 67%;
+      position: relative;
+      display: block;
+      z-index: 11;
+    }
+    &_yellowBg {
+      content: "";
+      // display: block;
+      position: absolute;
+      z-index: 10;
+      transform: translateX(-15vw);
+      width: 30vw;
+      height: 23px;
+      background-color: yellowgreen;
+    }
+    &_energy-text {
+      font-family: atariFont, sans-serif;
+      color: black;
+      position: absolute;
+      left: 3vw;
+    }
     // &_img {
     //   width: 500px;
     //   height: 10vh;
@@ -194,7 +236,7 @@ body {
   text-align: center;
   margin-top: 5px;
 }
-#energy-text {
-  font-family: atariFont, sans-serif;
-  color: black;
-}
+// #energy-text {
+//   font-family: atariFont, sans-serif;
+//   color: black;
+// }
