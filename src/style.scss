@@ -54,27 +54,27 @@ body {
   position: relative;
 }
 #player-zone {
-  height: 70px;
+  height: 8vh;
   /* align-self: flex-end; */
   width: 100%;
   display: flex;
   flex-direction: column;
   align-content: center;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-end;
+  justify-content: flex-start;
   flex-wrap: wrap;
   order: 1;
   flex-shrink: 0;
 }
 #player {
-  width: 5vw;
+  width: 6vh;
   height: 100%;
   // background-color: royalblue;
   position: relative;
   bottom: 0px;
   align-self: flex-end;
   background-image: url(../img/Player-ship.png);
-  background-size: contain;
+  background-size: 6vh;
   background-repeat: no-repeat;
   z-index: 10;
 
@@ -165,16 +165,16 @@ body {
   background-position: center;
 }
 .alien {
-  width: 6vw;
+  width: 7vh;
   height: 25px;
   /* border-radius: 50%; */
   // background-color: rgb(0, 189, 9);
-  background-image: url(../gif/enemyMoveGif2.gif);
+  background-image: url(../gif/enemyMoveGif3.gif);
   background-repeat: no-repeat;
-  background-repeat: contain;
+  // background-repeat: contain;
   // background-attachment: fixed;
   background-position: center;
-  background-size: 6vw;
+  background-size: 7vh;
   position: absolute;
   top: 10px;
   align-self: center;
