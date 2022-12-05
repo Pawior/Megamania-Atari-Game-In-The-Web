@@ -158,10 +158,19 @@ body {
       // display: block;
       position: absolute;
       z-index: 10;
-      transform: translateX(-15vw);
-      width: 30vw;
-      height: 23px;
+      transform: translateX(0vw);
+      width: 60vw;
+      height: 67%;
       background-color: yellowgreen;
+      // #5B1B69
+    }
+    &_purpleBg {
+      background-color: #5b1b69;
+      position: absolute;
+      z-index: 9;
+      transform: translateX(0vw);
+      width: 60vw;
+      height: 67%;
     }
     &_energy-text {
       font-family: atariFont, sans-serif;

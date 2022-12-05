@@ -12,6 +12,7 @@ export class StatsBar {
 
   constructor() {
     this.hp = 3;
+    this.manageEnergyBar();
     // this.player = player;
   }
   spawnStatsBar() {
@@ -30,5 +31,31 @@ export class StatsBar {
       healthDiv.classList.add("stats-bar_health-bar_heart");
       this.healthBarHTML.appendChild(healthDiv);
     }
+  }
+  manageEnergyBar() {
+    let energyBar: HTMLDivElement = document.querySelector(
+      "#stats-bar_energy-bar_yellowBg"
+    ) as HTMLDivElement;
+    let energyBarStyle = window.getComputedStyle(energyBar);
+
+    let energyBarStartWidth: number = 60;
+    let energyBarStartTransform: number = 0;
+
+    let energyBarWidth: number = parseInt(
+      energyBarStyle.getPropertyValue("width")
+    );
+    let matrixValue = energyBarStyle.getPropertyValue("transform");
+    console.log(matrixValue);
+    let matrixArr = matrixValue.split(", ");
+    console.log(matrixArr);
+    console.log(matrixArr[4]);
+    setInterval(() => {
+      console.log("managuje energy bar");
+      energyBarStartWidth -= 1;
+      energyBarStartTransform -= 0.5;
+      energyBar.style.width = `${energyBarStartWidth}vw`;
+      energyBar.style.transform = `translateX(${energyBarStartTransform}vw)`;
+      console.log(energyBarStartWidth);
+    }, 1000);
   }
 }
