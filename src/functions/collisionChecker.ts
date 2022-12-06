@@ -1,7 +1,10 @@
 import { aliensArr } from "./manageAliens";
-export const CollisonChecker = (passedDiv: HTMLDivElement): boolean => {
+export const CollisonChecker = (passedDiv: HTMLDivElement): any => {
   // console.log(aliensArr);
-  let collisionToReturn = false;
+  let collisionToReturn: any = {
+    hit: false,
+    enemyType: "hamburger",
+  };
   aliensArr.forEach((alien, idx) => {
     let alienPos = alien.alienHTML.getBoundingClientRect();
 
@@ -39,12 +42,15 @@ export const CollisonChecker = (passedDiv: HTMLDivElement): boolean => {
     if (horizontalMatch && verticalMatch) {
       console.log(passedDiv);
       //   let intersect = true;
+
       if (passedDiv.className == "bullet") {
         alien.alienHTML.remove();
         aliensArr.splice(idx, 1);
+        //  resToReturn;
       }
       console.log("kolizja!!! Juhu");
-      collisionToReturn = true;
+      collisionToReturn.hit = true;
+    } else {
     }
   });
   return collisionToReturn;

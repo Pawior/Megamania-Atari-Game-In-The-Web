@@ -3,6 +3,9 @@ import { Player } from "./Player";
 export class StatsBar {
   hp: number;
   // player: Player;
+  energyBarStartWidth: number = 60;
+  energyBarStartTransform: number = 0;
+
   statsBarHTML: HTMLDivElement = document.querySelector(
     "#stats-bar"
   ) as HTMLDivElement;
@@ -38,8 +41,8 @@ export class StatsBar {
     ) as HTMLDivElement;
     let energyBarStyle = window.getComputedStyle(energyBar);
 
-    let energyBarStartWidth: number = 60;
-    let energyBarStartTransform: number = 0;
+    // let energyBarStartWidth: number = 60;
+    // let energyBarStartTransform: number = 0;
 
     let energyBarWidth: number = parseInt(
       energyBarStyle.getPropertyValue("width")
@@ -51,11 +54,35 @@ export class StatsBar {
     console.log(matrixArr[4]);
     setInterval(() => {
       console.log("managuje energy bar");
-      energyBarStartWidth -= 1;
-      energyBarStartTransform -= 0.5;
-      energyBar.style.width = `${energyBarStartWidth}vw`;
-      energyBar.style.transform = `translateX(${energyBarStartTransform}vw)`;
-      console.log(energyBarStartWidth);
-    }, 1000);
+      this.energyBarStartWidth -= 0.5;
+      this.energyBarStartTransform -= 0.25;
+      energyBar.style.width = `${this.energyBarStartWidth}vw`;
+      energyBar.style.transform = `translateX(${this.energyBarStartTransform}vw)`;
+      console.log(this.energyBarStartWidth);
+    }, 500);
+  }
+  addPoints(alienType: string) {
+    console.log("managePoints");
+    let pointsBarTag: HTMLElement = document.querySelector(
+      "#stats-bar_points-bar_text"
+    ) as HTMLElement;
+    let pointsCurrentText = parseInt(pointsBarTag.textContent as string);
+    let pointsToAdd = 0;
+    switch (alienType) {
+      default:
+        pointsToAdd = 20;
+    }
+    let newPoints = (pointsCurrentText += pointsToAdd);
+    pointsBarTag.innerHTML = `${newPoints}`;
+  }
+  zeroPoints() {
+    let pointsBarTag: HTMLElement = document.querySelector(
+      "#stats-bar_points-bar_text"
+    ) as HTMLElement;
+    pointsBarTag.innerHTML = `${0}`;
+  }
+  resetEnergyBar() {
+    this.energyBarStartWidth = 60;
+    this.energyBarStartTransform = 0;
   }
 }

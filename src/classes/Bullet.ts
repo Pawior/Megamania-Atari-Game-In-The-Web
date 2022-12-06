@@ -1,8 +1,13 @@
 import { CollisonChecker } from "../functions/collisionChecker";
+import { StatsBar } from "./StatsBar";
 
 export class Bullet {
   bulletHTML: HTMLDivElement = document.createElement("div") as HTMLDivElement;
 
+  statsBar: StatsBar;
+  constructor(statsBar: StatsBar) {
+    this.statsBar = statsBar;
+  }
   spawnBullet(playerHTML: HTMLDivElement) {
     const bulletZone: HTMLDivElement = document.querySelector(
       "#bullet-zone"
@@ -27,11 +32,18 @@ export class Bullet {
       bulletBotProp += 3;
       // console.log(bulletBotProp);
       this.bulletHTML.style.bottom = `${bulletBotProp}vh`;
-      this.checkCollision();
+      let res: any = this.checkCollision();
+      console.log(res);
+      if (res.hit) {
+        this.addPointsAfterHit();
+      }
       // console.log(parseInt(bulletStyle.getPropertyValue("bottom")));
     }, 1000 / 20);
   }
   checkCollision() {
-    CollisonChecker(this.bulletHTML);
+    return CollisonChecker(this.bulletHTML);
+  }
+  addPointsAfterHit() {
+    this.statsBar.addPoints("hamburger");
   }
 }

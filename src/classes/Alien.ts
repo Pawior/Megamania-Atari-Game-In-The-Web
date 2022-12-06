@@ -15,7 +15,10 @@ export class Alien {
     ) as HTMLDivElement;
     this.alienHTML = document.createElement("div");
     this.alienHTML.classList.add("alien");
-    this.alienHTML.style.left = this.startLeft + "vw";
+    this.alienHTML.style.left = this.startLeft + "rem";
+    console.log(this.bgImage);
+    console.log("bg img");
+    this.alienHTML.style.backgroundImage = `url(../enemies/${this.bgImage})`;
     gameBoard.appendChild(this.alienHTML);
   }
   respawnAlien() {
@@ -67,4 +70,5 @@ export class Alien {
       this.alienHTML.style.top = `${top + moveVerticalStep}vh`;
     }, 1000 / 24);
   }
+  hamburgerMove() {}
 }

@@ -1,15 +1,17 @@
 import { Alien } from "../classes/Alien";
 
 let aliensArr: Alien[] = [];
+let currGameLevel = 0;
 export const ManageAliens = (): void => {
   let aliensAmount: number = 8;
 
   const spawnAliens = (): void => {
     for (let i = 0; i < aliensAmount; i++) {
       console.log("robie aliena");
-      let alien = new Alien("img", i * 2.5);
+      let alien = new Alien("enemyDisc.gif", i * 1);
       aliensArr.push(alien);
       alien.spawnAlien();
+      console.log(alien);
     }
   };
 
@@ -21,6 +23,35 @@ export const ManageAliens = (): void => {
   spawnAliens();
   moveAliens();
 };
+
+export const changeAliens = (): void => {
+  let aliensAmount: number = 16;
+
+  const spawnAliens = (): void => {
+    for (let i = 0; i < aliensAmount / 2; i++) {
+      console.log("robie aliena");
+      let alien = new Alien("enemyMoveGif3", i * 1);
+      aliensArr.push(alien);
+      alien.spawnAlien();
+      console.log(alien);
+    }
+  };
+  const moveAliens = (): void => {
+    aliensArr.forEach((alien: Alien) => {
+      alien.standardMove();
+    });
+  };
+  spawnAliens();
+  moveAliens();
+};
+
+export const hardResetAliens = (): void => {
+  aliensArr.forEach((alien: Alien) => {
+    alien.alienHTML.remove();
+  });
+  ManageAliens();
+};
+
 export const resetAliens = (): void => {
   // let restAliens = document.querySelectorAll(".alien");
   // for (let i = 0; i < restAliens.length; i++) {

@@ -1,7 +1,7 @@
 import { Bullet } from "./Bullet";
 import { CollisonChecker } from "../functions/collisionChecker";
 import { StatsBar } from "./StatsBar";
-import { resetAliens } from "../functions/manageAliens";
+import { resetAliens, hardResetAliens } from "../functions/manageAliens";
 
 export class Player {
   // static playerTag
@@ -45,7 +45,7 @@ export class Player {
       if (keyCode == "Space" && spamBullet) {
         spamBullet = false;
         console.log(spamBullet);
-        let bulletClass = new Bullet();
+        let bulletClass = new Bullet(this.statsBar);
         bulletClass.spawnBullet(this.playerHTML);
         setTimeout(() => {
           spamBullet = true;
@@ -60,7 +60,7 @@ export class Player {
     setInterval(() => {
       let doesCollided = CollisonChecker(this.playerHTML);
 
-      if (doesCollided && collisionBlock == false) {
+      if (doesCollided.hit && collisionBlock == false) {
         this.hurtPlayer();
         collisionBlock = true;
         setTimeout(() => {
@@ -75,6 +75,17 @@ export class Player {
     this.statsBar.updateHealthBar();
     console.log(this.statsBar);
     resetAliens();
+    if (this.statsBar.hp == 0) {
+      this.playerLost();
+    }
+  }
+
+  playerLost() {
+    hardResetAliens();
+    this.statsBar.zeroPoints();
+    this.statsBar.resetEnergyBar();
+    this.statsBar.hp = 3;
+    this.statsBar.updateHealthBar();
   }
 
   bestMovePlayer() {
