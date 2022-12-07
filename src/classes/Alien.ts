@@ -2,11 +2,13 @@ export class Alien {
   alienHTML: HTMLDivElement;
   bgImage: any;
   startLeft: number;
+  startHeight: number;
   intervalMove: any;
-  constructor(bgImage: any, startLeft: number) {
+  constructor(bgImage: any, startLeft: number, startHeight: number) {
     this.alienHTML = document.createElement("div");
     this.bgImage = bgImage;
     this.startLeft = startLeft;
+    this.startHeight = startHeight;
   }
 
   spawnAlien() {
@@ -16,6 +18,7 @@ export class Alien {
     this.alienHTML = document.createElement("div");
     this.alienHTML.classList.add("alien");
     this.alienHTML.style.left = this.startLeft + "rem";
+    this.alienHTML.style.top = this.startHeight + "vh";
     console.log(this.bgImage);
     console.log("bg img");
     this.alienHTML.style.backgroundImage = `url(../enemies/${this.bgImage})`;
@@ -49,7 +52,7 @@ export class Alien {
       }
 
       if (moveVerticalStep >= 70) {
-        moveVerticalStep = 0;
+        moveVerticalStep = -20;
       }
 
       // if (left > -48) {

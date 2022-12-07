@@ -2,6 +2,7 @@ import { Bullet } from "./Bullet";
 import { CollisonChecker } from "../functions/collisionChecker";
 import { StatsBar } from "./StatsBar";
 import { resetAliens, hardResetAliens } from "../functions/manageAliens";
+import { aliensArr } from "../functions/manageAliens";
 
 export class Player {
   // static playerTag
@@ -10,6 +11,7 @@ export class Player {
   constructor() {
     this.playerHTML = <HTMLDivElement>document.createElement("div");
     this.statsBar = new StatsBar();
+    this.manageEnergyBar();
   }
   initialize() {
     this.spawnPlayer();
@@ -139,5 +141,9 @@ export class Player {
     // let statsBar = new StatsBar();
     this.statsBar.spawnStatsBar();
     this.statsBar.updateHealthBar();
+  }
+
+  manageEnergyBar() {
+    this.statsBar.manageEnergyBar(this.hurtPlayer.bind(this));
   }
 }

@@ -3,12 +3,12 @@ import { Alien } from "../classes/Alien";
 let aliensArr: Alien[] = [];
 let currGameLevel = 0;
 export const ManageAliens = (): void => {
-  let aliensAmount: number = 8;
+  let aliensAmount: number = 2;
 
   const spawnAliens = (): void => {
     for (let i = 0; i < aliensAmount; i++) {
       console.log("robie aliena");
-      let alien = new Alien("enemyDisc.gif", i * 1);
+      let alien = new Alien("enemyDisc.gif", i * 1, 3);
       aliensArr.push(alien);
       alien.spawnAlien();
       console.log(alien);
@@ -24,16 +24,18 @@ export const ManageAliens = (): void => {
   moveAliens();
 };
 
-export const changeAliens = (): void => {
+export const spawnBurgers = (): void => {
   let aliensAmount: number = 16;
 
   const spawnAliens = (): void => {
     for (let i = 0; i < aliensAmount / 2; i++) {
-      console.log("robie aliena");
-      let alien = new Alien("enemyMoveGif3", i * 1);
-      aliensArr.push(alien);
-      alien.spawnAlien();
-      console.log(alien);
+      for (let j = 1; j < 4; j++) {
+        console.log("robie aliena");
+        let alien = new Alien("enemyHamburger.png", i * 1, j * 1.5);
+        aliensArr.push(alien);
+        alien.spawnAlien();
+        console.log(alien);
+      }
     }
   };
   const moveAliens = (): void => {
@@ -81,5 +83,13 @@ export const resetAliens = (): void => {
   //   alien.standardMove();
   // });
 };
+
+const nextWave = () => {};
+// const aliensStateChecker = () => {
+//   // setInterval( () => {
+
+//   // }, 500 )
+
+// }
 
 export { aliensArr };

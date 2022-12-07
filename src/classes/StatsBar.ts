@@ -2,8 +2,9 @@ import { Player } from "./Player";
 
 export class StatsBar {
   hp: number;
+  points: number;
   // player: Player;
-  energyBarStartWidth: number = 60;
+  energyBarStartWidth: number = 10;
   energyBarStartTransform: number = 0;
 
   statsBarHTML: HTMLDivElement = document.querySelector(
@@ -15,7 +16,8 @@ export class StatsBar {
 
   constructor() {
     this.hp = 3;
-    this.manageEnergyBar();
+    this.points = 0;
+    // this.manageEnergyBar();
     // this.player = player;
   }
   spawnStatsBar() {
@@ -35,7 +37,7 @@ export class StatsBar {
       this.healthBarHTML.appendChild(healthDiv);
     }
   }
-  manageEnergyBar() {
+  manageEnergyBar(hurtPlayerFunc: () => void) {
     let energyBar: HTMLDivElement = document.querySelector(
       "#stats-bar_energy-bar_yellowBg"
     ) as HTMLDivElement;
@@ -52,13 +54,44 @@ export class StatsBar {
     let matrixArr = matrixValue.split(", ");
     console.log(matrixArr);
     console.log(matrixArr[4]);
-    setInterval(() => {
+    // this.energyBarChecker(energyBar).then(() => {
+    //   console.log("koniec energii");
+    //   hurtPlayerFunc();
+    //   this.energyBarStartWidth = 60;
+    // });
+
+    this.energyBarChecker(energyBar, hurtPlayerFunc);
+
+    // setInterval(() => {
+    //   console.log("managuje energy bar");
+    //   this.energyBarStartWidth -= 0.5;
+    //   this.energyBarStartTransform -= 0.25;
+    //   energyBar.style.width = `${this.energyBarStartWidth}vw`;
+    //   energyBar.style.transform = `translateX(${this.energyBarStartTransform}vw)`;
+    //   console.log(this.energyBarStartWidth);
+    //   if (this.energyBarStartWidth <= 0) {
+    //     return true;
+    //   }
+    // }, 500);
+  }
+  energyBarChecker(
+    energyBar: HTMLDivElement,
+    hurtPlayerFunc: () => void
+  ): void {
+    let interval = setInterval(() => {
       console.log("managuje energy bar");
       this.energyBarStartWidth -= 0.5;
       this.energyBarStartTransform -= 0.25;
       energyBar.style.width = `${this.energyBarStartWidth}vw`;
       energyBar.style.transform = `translateX(${this.energyBarStartTransform}vw)`;
       console.log(this.energyBarStartWidth);
+      if (this.energyBarStartWidth <= 0) {
+        // clearInterval(interval);
+        // resolve("done");
+        hurtPlayerFunc();
+        this.energyBarStartWidth = 60;
+        this.energyBarStartTransform = 0;
+      }
     }, 500);
   }
   addPoints(alienType: string) {
