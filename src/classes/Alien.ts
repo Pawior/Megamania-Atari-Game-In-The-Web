@@ -17,7 +17,7 @@ export class Alien {
     ) as HTMLDivElement;
     this.alienHTML = document.createElement("div");
     this.alienHTML.classList.add("alien");
-    this.alienHTML.style.left = this.startLeft + "rem";
+    this.alienHTML.style.left = this.startLeft + "vw";
     this.alienHTML.style.top = this.startHeight + "vh";
     console.log(this.bgImage);
     console.log("bg img");
@@ -26,8 +26,8 @@ export class Alien {
   }
   respawnAlien() {
     clearInterval(this.intervalMove);
-    this.alienHTML.style.top = 10 + "px";
     this.alienHTML.style.left = this.startLeft + "vw";
+    this.alienHTML.style.top = this.startHeight + "vh";
     this.alienHTML.style.display = "none";
     setTimeout(() => {
       this.alienHTML.style.display = "block";
@@ -70,8 +70,49 @@ export class Alien {
       moveVerticalStep += incrementorVertical;
       checkMaxIncrement();
       this.alienHTML.style.left = `${left + moveHorizontalStep}vw`;
+      console.log(this.alienHTML.style.left);
       this.alienHTML.style.top = `${top + moveVerticalStep}vh`;
     }, 1000 / 24);
   }
-  hamburgerMove() {}
+  hamburgerMove() {
+    let moveHorizontalStep: number = 0;
+    let style = window.getComputedStyle(this.alienHTML);
+    // let left = parseInt(style.getPropertyValue("left"));
+    console.log(this.alienHTML.style.left);
+    let left = parseInt(this.alienHTML.style.left.replace(/\D/g, ""));
+
+    // myString = myString.replace(/\D/g,'');
+    // let incrementorHorizontalSum: number = 0;
+    let incrementorHorizontal: number = 1;
+    let incrementorVertical: number = 1;
+    let windowMove = window.innerWidth;
+
+    const checkMaxIncrement = () => {
+      // let left = parseInt(style.getPropertyValue("left"));
+      // console.log(left);
+      // console.log(left);
+      if (left > 100) {
+        // this.alienHTML.style.left = "-5vw";
+        // moveHorizontalStep = -80;
+        left = -5;
+      }
+      // else if (moveHorizontalStep < -30) {
+      //   incrementorHorizontal = 1;
+      // }
+
+      // if (moveHorizontalStep >= 90) {
+      //   moveHorizontalStep = -20;
+      //   this.alienHTML.style.left = `0vw`;
+      // }
+    };
+
+    this.intervalMove = setInterval(() => {
+      left += incrementorHorizontal;
+      // let left = parseInt(style.getPropertyValue("left"));
+      // console.log(left);
+      // console.log(moveHorizontalStep);
+      checkMaxIncrement();
+      this.alienHTML.style.left = `${left}vw`;
+    }, 1000 / 24);
+  }
 }

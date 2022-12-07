@@ -1,6 +1,10 @@
 import { CollisonChecker } from "../functions/collisionChecker";
 import { StatsBar } from "./StatsBar";
-import { aliensArr, spawnBurgers } from "../functions/manageAliens";
+import {
+  aliensArr,
+  spawnBurgers,
+  goToNextWave,
+} from "../functions/manageAliens";
 
 export class Bullet {
   bulletHTML: HTMLDivElement = document.createElement("div") as HTMLDivElement;
@@ -37,10 +41,10 @@ export class Bullet {
       // console.log(res);
       if (res.hit) {
         this.addPointsAfterHit();
-        if (aliensArr.length == 0) {
-          console.log("Brak alienów");
-          spawnBurgers();
-        }
+        // if (aliensArr.length == 0) {
+        //   console.log("Brak alienów");
+        //   goToNextWave();
+        // }
       }
       // console.log(parseInt(bulletStyle.getPropertyValue("bottom")));
     }, 1000 / 20);

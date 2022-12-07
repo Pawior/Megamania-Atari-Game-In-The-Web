@@ -2,36 +2,56 @@ import { Alien } from "../classes/Alien";
 
 let aliensArr: Alien[] = [];
 let currGameLevel = 0;
+let currEnemyType: string;
 export const ManageAliens = (): void => {
-  let aliensAmount: number = 2;
+  // const spawnAliens = (): void => {
+  //   for (let i = 0; i < aliensAmount; i++) {
+  //     console.log("robie aliena");
+  //     let alien = new Alien("enemyDisc.gif", i * 1, 3);
+  //     aliensArr.push(alien);
+  //     alien.spawnAlien();
+  //     console.log(alien);
+  //   }
+  // };
 
-  const spawnAliens = (): void => {
-    for (let i = 0; i < aliensAmount; i++) {
-      console.log("robie aliena");
-      let alien = new Alien("enemyDisc.gif", i * 1, 3);
-      aliensArr.push(alien);
-      alien.spawnAlien();
-      console.log(alien);
-    }
-  };
+  // const moveAliens = (): void => {
+  //   aliensArr.forEach((alien: Alien) => {
+  //     alien.standardMove();
+  //   });
+  // };
+  // moveAliens();
 
+  spawnBurgers();
+};
+
+export const spawnDiscs = (): void => {
+  currEnemyType = "discs";
+  let aliensAmount: number = 1;
+
+  for (let i = 0; i < aliensAmount; i++) {
+    console.log("robie aliena");
+    let alien = new Alien("enemyDisc.gif", i * 1, 3);
+    aliensArr.push(alien);
+    alien.spawnAlien();
+    console.log(alien);
+  }
   const moveAliens = (): void => {
     aliensArr.forEach((alien: Alien) => {
       alien.standardMove();
     });
   };
-  spawnAliens();
   moveAliens();
 };
 
 export const spawnBurgers = (): void => {
-  let aliensAmount: number = 16;
+  currEnemyType = "burgers";
+  let aliensAmount: number = 3;
 
   const spawnAliens = (): void => {
     for (let i = 0; i < aliensAmount / 2; i++) {
       for (let j = 1; j < 4; j++) {
         console.log("robie aliena");
-        let alien = new Alien("enemyHamburger.png", i * 1, j * 1.5);
+        let alien = new Alien("enemyHamburger.png", i * 7, j * 8);
         aliensArr.push(alien);
         alien.spawnAlien();
         console.log(alien);
@@ -40,7 +60,7 @@ export const spawnBurgers = (): void => {
   };
   const moveAliens = (): void => {
     aliensArr.forEach((alien: Alien) => {
-      alien.standardMove();
+      alien.hamburgerMove();
     });
   };
   spawnAliens();
@@ -71,7 +91,12 @@ export const resetAliens = (): void => {
     aliensArr.forEach((alien) => {
       alien.respawnAlien();
       console.log("przemieszczam");
-      alien.standardMove();
+      switch (currEnemyType) {
+        case "discs":
+          alien.standardMove();
+        case "burgers":
+          alien.hamburgerMove();
+      }
     });
   };
   respawnAliens();
@@ -84,7 +109,32 @@ export const resetAliens = (): void => {
   // });
 };
 
-const nextWave = () => {};
+export const goToNextWave = () => {
+  switch (currEnemyType) {
+    case "discs":
+      spawnBurgers();
+    case "burgers":
+      spawnDiscs();
+  }
+};
+
+let monitoringI = 0;
+
+const monitorAliensState = () => {
+  monitoringI++;
+  let monitoring = setInterval(() => {
+    console.log("monitoring " + monitoringI + " działa");
+    if (aliensArr.length == 0) {
+      // console.log("Brak alienów");
+      goToNextWave();
+      clearInterval(monitoring);
+      setTimeout(() => {
+        monitorAliensState();
+      }, 1000);
+    }
+  }, 300);
+};
+monitorAliensState();
 // const aliensStateChecker = () => {
 //   // setInterval( () => {
 
