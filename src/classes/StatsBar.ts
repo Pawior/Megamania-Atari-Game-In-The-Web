@@ -42,9 +42,6 @@ export class StatsBar {
     ) as HTMLDivElement;
     let energyBarStyle = window.getComputedStyle(energyBar);
 
-    // let energyBarStartWidth: number = 60;
-    // let energyBarStartTransform: number = 0;
-
     let energyBarWidth: number = parseInt(
       energyBarStyle.getPropertyValue("width")
     );
@@ -55,25 +52,13 @@ export class StatsBar {
     // console.log(matrixArr[4]);
 
     this.energyBarChecker(energyBar, hurtPlayerFunc);
-
-    // setInterval(() => {
-    //   console.log("managuje energy bar");
-    //   this.energyBarStartWidth -= 0.5;
-    //   this.energyBarStartTransform -= 0.25;
-    //   energyBar.style.width = `${this.energyBarStartWidth}vw`;
-    //   energyBar.style.transform = `translateX(${this.energyBarStartTransform}vw)`;
-    //   console.log(this.energyBarStartWidth);
-    //   if (this.energyBarStartWidth <= 0) {
-    //     return true;
-    //   }
-    // }, 500);
   }
   energyBarChecker(
     energyBar: HTMLDivElement,
     hurtPlayerFunc: () => void
   ): void {
     let interval = setInterval(() => {
-      console.log("managuje energy bar");
+      // console.log("managuje energy bar");
       this.energyBarStartWidth -= 0.5;
       this.energyBarStartTransform -= 0.25;
       energyBar.style.width = `${this.energyBarStartWidth}vw`;

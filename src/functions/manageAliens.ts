@@ -113,28 +113,34 @@ export const goToNextWave = () => {
   switch (currEnemyType) {
     case "discs":
       spawnBurgers();
+      break;
     case "burgers":
       spawnDiscs();
+      break;
+    default:
+      console.log("no respawn");
   }
 };
 
 let monitoringI = 0;
 
-const monitorAliensState = () => {
-  monitoringI++;
-  let monitoring = setInterval(() => {
-    console.log("monitoring " + monitoringI + " działa");
-    if (aliensArr.length == 0) {
-      // console.log("Brak alienów");
-      goToNextWave();
-      clearInterval(monitoring);
-      setTimeout(() => {
-        monitorAliensState();
-      }, 1000);
-    }
-  }, 300);
-};
-monitorAliensState();
+// const monitorAliensState = () => {
+//   monitoringI++;
+//   let monitoring = setInterval(() => {
+//     // console.log("monitoring " + monitoringI + " działa");
+
+//     // console.log("Brak alienów");
+//     console.log(aliensArr);
+//     if (aliensArr.length == 0) {
+//       clearInterval(monitoring);
+//       // goToNextWave();
+//       setTimeout(() => {
+//         monitorAliensState();
+//       }, 1000);
+//     }
+//   }, 300);
+// };
+// monitorAliensState();
 // const aliensStateChecker = () => {
 //   // setInterval( () => {
 

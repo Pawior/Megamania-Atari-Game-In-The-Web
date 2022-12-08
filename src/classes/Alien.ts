@@ -70,7 +70,7 @@ export class Alien {
       moveVerticalStep += incrementorVertical;
       checkMaxIncrement();
       this.alienHTML.style.left = `${left + moveHorizontalStep}vw`;
-      console.log(this.alienHTML.style.left);
+      // console.log(this.alienHTML.style.left);
       this.alienHTML.style.top = `${top + moveVerticalStep}vh`;
     }, 1000 / 24);
   }
@@ -108,11 +108,16 @@ export class Alien {
 
     this.intervalMove = setInterval(() => {
       left += incrementorHorizontal;
-      console.log("x");
       // let left = parseInt(style.getPropertyValue("left"));
       // console.log(left);
       // console.log(moveHorizontalStep);
-      this.checkAlienHtmlExistence(this.alienHTML);
+      // this.checkAlienHtmlExistence(this.alienHTML);
+      if (document.body.contains(this.alienHTML)) {
+        console.log("jest html");
+      } else {
+        console.log("nie ma html wdomu");
+        clearInterval(this.intervalMove);
+      }
       checkMaxIncrement();
       this.alienHTML.style.left = `${left}vw`;
     }, 1000 / 24);
