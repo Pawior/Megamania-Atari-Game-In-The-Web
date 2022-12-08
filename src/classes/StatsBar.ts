@@ -30,7 +30,6 @@ export class StatsBar {
   }
   updateHealthBar() {
     this.healthBarHTML.replaceChildren();
-    console.log("robie");
     for (let i = 0; i < this.hp; i++) {
       let healthDiv = document.createElement("div");
       healthDiv.classList.add("stats-bar_health-bar_heart");
@@ -50,15 +49,10 @@ export class StatsBar {
       energyBarStyle.getPropertyValue("width")
     );
     let matrixValue = energyBarStyle.getPropertyValue("transform");
-    console.log(matrixValue);
     let matrixArr = matrixValue.split(", ");
-    console.log(matrixArr);
-    console.log(matrixArr[4]);
-    // this.energyBarChecker(energyBar).then(() => {
-    //   console.log("koniec energii");
-    //   hurtPlayerFunc();
-    //   this.energyBarStartWidth = 60;
-    // });
+    // console.log(matrixValue);
+    // console.log(matrixArr);
+    // console.log(matrixArr[4]);
 
     this.energyBarChecker(energyBar, hurtPlayerFunc);
 
@@ -84,7 +78,6 @@ export class StatsBar {
       this.energyBarStartTransform -= 0.25;
       energyBar.style.width = `${this.energyBarStartWidth}vw`;
       energyBar.style.transform = `translateX(${this.energyBarStartTransform}vw)`;
-      console.log(this.energyBarStartWidth);
       if (this.energyBarStartWidth <= 0) {
         // clearInterval(interval);
         // resolve("done");
@@ -95,7 +88,6 @@ export class StatsBar {
     }, 500);
   }
   addPoints(alienType: string) {
-    console.log("managePoints");
     let pointsBarTag: HTMLElement = document.querySelector(
       "#stats-bar_points-bar_text"
     ) as HTMLElement;

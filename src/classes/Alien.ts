@@ -108,11 +108,29 @@ export class Alien {
 
     this.intervalMove = setInterval(() => {
       left += incrementorHorizontal;
+      console.log("x");
       // let left = parseInt(style.getPropertyValue("left"));
       // console.log(left);
       // console.log(moveHorizontalStep);
+      this.checkAlienHtmlExistence(this.alienHTML);
       checkMaxIncrement();
       this.alienHTML.style.left = `${left}vw`;
     }, 1000 / 24);
+  }
+  checkAlienHtmlExistence(elem: HTMLDivElement) {
+    var in_dom = document.body.contains(elem);
+    var observer = new MutationObserver((mutations) => {
+      if (document.body.contains(elem)) {
+        if (!in_dom) {
+          console.log("element inserted");
+        }
+        in_dom = true;
+      } else if (in_dom) {
+        in_dom = false;
+        console.log("element removed");
+        clearInterval(this.intervalMove);
+      }
+    });
+    observer.observe(document.body, { childList: true, subtree: true });
   }
 }
