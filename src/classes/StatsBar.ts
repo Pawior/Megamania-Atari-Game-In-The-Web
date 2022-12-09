@@ -1,10 +1,11 @@
 import { Player } from "./Player";
+import { currEnemyType } from "../functions/manageAliens";
 
 export class StatsBar {
   hp: number;
   points: number;
   // player: Player;
-  energyBarStartWidth: number = 10;
+  energyBarStartWidth: number = 60;
   energyBarStartTransform: number = 0;
 
   statsBarHTML: HTMLDivElement = document.querySelector(
@@ -60,7 +61,7 @@ export class StatsBar {
     let interval = setInterval(() => {
       // console.log("managuje energy bar");
       this.energyBarStartWidth -= 0.5;
-      this.energyBarStartTransform -= 0.25;
+      // this.energyBarStartTransform -= 0.25;
       energyBar.style.width = `${this.energyBarStartWidth}vw`;
       energyBar.style.transform = `translateX(${this.energyBarStartTransform}vw)`;
       if (this.energyBarStartWidth <= 0) {
@@ -72,16 +73,25 @@ export class StatsBar {
       }
     }, 500);
   }
-  addPoints(alienType: string) {
+  addPoints() {
     let pointsBarTag: HTMLElement = document.querySelector(
       "#stats-bar_points-bar_text"
     ) as HTMLElement;
     let pointsCurrentText = parseInt(pointsBarTag.textContent as string);
     let pointsToAdd = 0;
-    switch (alienType) {
+    console.log("currEnemyType");
+    console.log(currEnemyType);
+    switch (currEnemyType) {
+      case "burgers":
+        pointsToAdd = 20;
+        break;
+      case "discs":
+        pointsToAdd = 60;
+        break;
       default:
         pointsToAdd = 20;
     }
+
     let newPoints = (pointsCurrentText += pointsToAdd);
     pointsBarTag.innerHTML = `${newPoints}`;
   }

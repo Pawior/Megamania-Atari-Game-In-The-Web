@@ -130,6 +130,7 @@ body {
   flex-direction: column;
   padding-top: 4px;
   position: relative;
+  // z-index: 100;
   &_energy-bar {
     height: 40%;
     display: flex;
@@ -158,10 +159,17 @@ body {
       // display: block;
       position: absolute;
       z-index: 10;
-      transform: translateX(0vw);
+      left: 20vw;
+      // transform: translateX(-30vw);
       width: 60vw;
       height: 67%;
       background-color: yellowgreen;
+
+      animation-name: animateEnergyBar;
+      animation-duration: 2000ms;
+      animation-iteration-count: 1;
+      // animation-fill-mode: forwards;
+
       // #5B1B69
     }
     &_purpleBg {
@@ -246,8 +254,19 @@ body {
   height: 10px;
   text-align: center;
   margin-top: 5px;
+  // overflow: hidden;
+  min-width: 20vw;
 }
 // #energy-text {
 //   font-family: atariFont, sans-serif;
 //   color: black;
 // }
+
+@keyframes animateEnergyBar {
+  0% {
+    width: 0vw;
+  }
+  100% {
+    width: 60vw;
+  }
+}

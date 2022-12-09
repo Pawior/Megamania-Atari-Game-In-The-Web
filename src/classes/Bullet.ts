@@ -1,5 +1,6 @@
 import { CollisonChecker } from "../functions/collisionChecker";
 import { StatsBar } from "./StatsBar";
+import { currEnemyType } from "../functions/manageAliens";
 import {
   aliensArr,
   spawnBurgers,
@@ -35,8 +36,8 @@ export class Bullet {
 
     let bulletShootInterval = setInterval(() => {
       bulletBotProp += 3;
-      console.log("aliensArr");
-      console.log(aliensArr);
+      // console.log("aliensArr");
+      // console.log(aliensArr);
       // console.log(bulletBotProp);
       this.bulletHTML.style.bottom = `${bulletBotProp}vh`;
       let res: any = this.checkCollision();
@@ -44,7 +45,6 @@ export class Bullet {
       if (res.hit) {
         this.addPointsAfterHit();
         if (aliensArr.length == 0) {
-          console.log("Brak alienów");
           goToNextWave();
           this.statsBar.resetEnergyBar();
         }
@@ -54,7 +54,6 @@ export class Bullet {
       if (bulletBotProp > 105) {
         clearInterval(bulletShootInterval);
         this.bulletHTML.remove();
-        console.log("kula bye bye");
       }
       // console.log(parseInt(bulletStyle.getPropertyValue("bottom")));
     }, 1000 / 20);
@@ -63,6 +62,6 @@ export class Bullet {
     return CollisonChecker(this.bulletHTML);
   }
   addPointsAfterHit() {
-    this.statsBar.addPoints("hamburger");
+    this.statsBar.addPoints();
   }
 }

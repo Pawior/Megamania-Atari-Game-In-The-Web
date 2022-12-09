@@ -108,14 +108,11 @@ export class Alien {
 
     this.intervalMove = setInterval(() => {
       left += incrementorHorizontal;
-      // let left = parseInt(style.getPropertyValue("left"));
-      // console.log(left);
-      // console.log(moveHorizontalStep);
-      // this.checkAlienHtmlExistence(this.alienHTML);
+
       if (document.body.contains(this.alienHTML)) {
-        console.log("jest html");
+        // console.log("jest html");
       } else {
-        console.log("nie ma html wdomu");
+        // console.log("nie ma html wdomu");
         clearInterval(this.intervalMove);
       }
       checkMaxIncrement();

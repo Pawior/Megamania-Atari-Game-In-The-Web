@@ -2,7 +2,7 @@ import { Alien } from "../classes/Alien";
 
 let aliensArr: Alien[] = [];
 let currGameLevel = 0;
-let currEnemyType: string;
+export let currEnemyType: string;
 export const ManageAliens = (): void => {
   // const spawnAliens = (): void => {
   //   for (let i = 0; i < aliensAmount; i++) {
@@ -94,8 +94,10 @@ export const resetAliens = (): void => {
       switch (currEnemyType) {
         case "discs":
           alien.standardMove();
+          break;
         case "burgers":
           alien.hamburgerMove();
+          break;
       }
     });
   };
