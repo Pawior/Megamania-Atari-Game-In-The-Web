@@ -4,11 +4,13 @@ export class Alien {
   startLeft: number;
   startHeight: number;
   intervalMove: any;
+  canMove: boolean;
   constructor(bgImage: any, startLeft: number, startHeight: number) {
     this.alienHTML = document.createElement("div");
     this.bgImage = bgImage;
     this.startLeft = startLeft;
     this.startHeight = startHeight;
+    this.canMove = true;
   }
 
   spawnAlien() {
@@ -33,6 +35,13 @@ export class Alien {
       this.alienHTML.style.display = "block";
     }, 50);
     // this.standardMove();
+  }
+  stopMove() {
+    // clearInterval(this.intervalMove);
+    this.canMove = false;
+    setTimeout(() => {
+      this.canMove = true;
+    }, 3000);
   }
   standardMove() {
     let moveHorizontalStep: number = 0;
@@ -66,12 +75,14 @@ export class Alien {
     };
 
     this.intervalMove = setInterval(() => {
-      moveHorizontalStep += incrementorHorizontal;
-      moveVerticalStep += incrementorVertical;
-      checkMaxIncrement();
-      this.alienHTML.style.left = `${left + moveHorizontalStep}vw`;
-      // console.log(this.alienHTML.style.left);
-      this.alienHTML.style.top = `${top + moveVerticalStep}vh`;
+      if (this.canMove) {
+        moveHorizontalStep += incrementorHorizontal;
+        moveVerticalStep += incrementorVertical;
+        checkMaxIncrement();
+        this.alienHTML.style.left = `${left + moveHorizontalStep}vw`;
+        // console.log(this.alienHTML.style.left);
+        this.alienHTML.style.top = `${top + moveVerticalStep}vh`;
+      }
     }, 1000 / 24);
   }
   hamburgerMove() {
@@ -107,16 +118,18 @@ export class Alien {
     };
 
     this.intervalMove = setInterval(() => {
-      left += incrementorHorizontal;
+      if (this.canMove) {
+        left += incrementorHorizontal;
 
-      if (document.body.contains(this.alienHTML)) {
-        // console.log("jest html");
-      } else {
-        // console.log("nie ma html wdomu");
-        clearInterval(this.intervalMove);
+        if (document.body.contains(this.alienHTML)) {
+          // console.log("jest html");
+        } else {
+          // console.log("nie ma html wdomu");
+          clearInterval(this.intervalMove);
+        }
+        checkMaxIncrement();
+        this.alienHTML.style.left = `${left}vw`;
       }
-      checkMaxIncrement();
-      this.alienHTML.style.left = `${left}vw`;
     }, 1000 / 24);
   }
   checkAlienHtmlExistence(elem: HTMLDivElement) {

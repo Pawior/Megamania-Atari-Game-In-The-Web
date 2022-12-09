@@ -1,16 +1,22 @@
 import { Bullet } from "./Bullet";
 import { CollisonChecker } from "../functions/collisionChecker";
 import { StatsBar } from "./StatsBar";
-import { resetAliens, hardResetAliens } from "../functions/manageAliens";
+import {
+  resetAliens,
+  hardResetAliens,
+  stopMove,
+} from "../functions/manageAliens";
 import { aliensArr } from "../functions/manageAliens";
 
 export class Player {
   // static playerTag
   playerHTML: HTMLDivElement;
   statsBar: StatsBar;
+  static canMove: boolean;
   constructor() {
     this.playerHTML = <HTMLDivElement>document.createElement("div");
     this.statsBar = new StatsBar();
+    Player.canMove = true;
     this.manageEnergyBar();
   }
   initialize() {
@@ -64,6 +70,11 @@ export class Player {
 
       if (doesCollided.hit && collisionBlock == false) {
         this.hurtPlayer();
+        Player.playerDeath();
+        // setTimeout(() => {
+        // }, 3000);
+        // this.hurtPlayer();
+
         collisionBlock = true;
         setTimeout(() => {
           collisionBlock = false;
@@ -77,6 +88,8 @@ export class Player {
     this.statsBar.updateHealthBar();
     console.log(this.statsBar);
     resetAliens();
+    // setTimeout(() => {
+    // }, 2);
     if (this.statsBar.hp == 0) {
       this.playerLost();
     }
@@ -133,8 +146,8 @@ export class Player {
       }
     };
     /// game loop
-    setInterval(function () {
-      detectCharacterMovement();
+    setInterval(() => {
+      Player.canMove ? detectCharacterMovement() : null;
     }, 1000 / 24);
   }
   initializeStatsBar() {
@@ -145,5 +158,29 @@ export class Player {
 
   manageEnergyBar() {
     this.statsBar.manageEnergyBar(this.hurtPlayer.bind(this));
+  }
+  // changeMove(){
+  //   this.canMove = false;
+  // }
+  static playerDeath() {
+    console.log("Player umarł");
+    const playerHtmlTag = document.querySelector("#player") as HTMLDivElement;
+    let discoColor = setInterval(() => {
+      console.log("umiera player");
+      // let randColor = colors[Math.floor(Math.random() * colors.length)];
+      let randColor = Math.floor(Math.random() * 1000);
+      let randBright = Math.random();
+      playerHtmlTag.style.filter = `brightness(${randBright}) hue-rotate(${randColor}deg)`;
+      // playerHtmlTag.style.filter = `brightness(${randBright})`;
+    }, 140);
+    stopMove();
+    Player.canMove = false;
+    StatsBar.animationEnergyBar();
+
+    setTimeout(() => {
+      clearInterval(discoColor);
+      playerHtmlTag.style.filter = ``;
+      Player.canMove = true;
+    }, 3000);
   }
 }

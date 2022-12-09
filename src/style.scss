@@ -71,9 +71,14 @@ body {
   height: 100%;
   // background-color: royalblue;
   position: relative;
-  bottom: 0px;
+  bottom: 10px;
   align-self: flex-end;
-  background-image: url(../img/Player-ship.png);
+  background-image: url(../img/Player-shipTransparent.png);
+  // background-color: #5b1b69;
+  // filter: invert(48%) sepia(13%) saturate(3207%) hue-rotate(130deg);
+  // filter: hue-rotate(500deg);
+  //   brightness(95%) contrast(80%);
+
   background-size: 6vh;
   background-repeat: no-repeat;
   z-index: 10;
@@ -165,9 +170,9 @@ body {
       height: 67%;
       background-color: yellowgreen;
 
-      animation-name: animateEnergyBar;
-      animation-duration: 2000ms;
-      animation-iteration-count: 1;
+      // animation-name: animateEnergyBar;
+      // animation-duration: 2000ms;
+      // animation-iteration-count: 1;
       // animation-fill-mode: forwards;
 
       // #5B1B69
@@ -214,6 +219,11 @@ body {
       margin-bottom: 8px;
     }
   }
+}
+.energyBarAnimation {
+  animation-name: animateEnergyBar;
+  animation-duration: 3000ms;
+  animation-iteration-count: 1;
 }
 .stats-bar_health-bar_heart {
   width: 10vh;

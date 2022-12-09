@@ -1,4 +1,5 @@
 import { Alien } from "../classes/Alien";
+import { StatsBar } from "../classes/StatsBar";
 
 let aliensArr: Alien[] = [];
 let currGameLevel = 0;
@@ -27,6 +28,7 @@ export const ManageAliens = (): void => {
 export const spawnDiscs = (): void => {
   currEnemyType = "discs";
   let aliensAmount: number = 1;
+  console.log("spawn disców");
 
   for (let i = 0; i < aliensAmount; i++) {
     console.log("robie aliena");
@@ -41,11 +43,13 @@ export const spawnDiscs = (): void => {
     });
   };
   moveAliens();
+  console.log(aliensArr);
 };
 
 export const spawnBurgers = (): void => {
   currEnemyType = "burgers";
   let aliensAmount: number = 3;
+  console.log("spawn burgerów");
 
   const spawnAliens = (): void => {
     for (let i = 0; i < aliensAmount / 2; i++) {
@@ -65,6 +69,7 @@ export const spawnBurgers = (): void => {
   };
   spawnAliens();
   moveAliens();
+  console.log(aliensArr);
 };
 
 export const hardResetAliens = (): void => {
@@ -112,6 +117,8 @@ export const resetAliens = (): void => {
 };
 
 export const goToNextWave = () => {
+  console.log("spawn zrobiłem");
+  console.log(aliensArr);
   switch (currEnemyType) {
     case "discs":
       spawnBurgers();
@@ -122,6 +129,14 @@ export const goToNextWave = () => {
     default:
       console.log("no respawn");
   }
+  // animation
+  StatsBar.animationEnergyBar();
+};
+
+export const stopMove = () => {
+  aliensArr.forEach((alien) => {
+    alien.stopMove();
+  });
 };
 
 let monitoringI = 0;

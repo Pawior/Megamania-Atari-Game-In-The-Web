@@ -43,8 +43,12 @@ export class Bullet {
       let res: any = this.checkCollision();
       // console.log(res);
       if (res.hit) {
+        console.log("trafiony");
+        console.log(aliensArr);
         this.addPointsAfterHit();
         if (aliensArr.length == 0) {
+          console.log("next fala");
+
           goToNextWave();
           this.statsBar.resetEnergyBar();
         }

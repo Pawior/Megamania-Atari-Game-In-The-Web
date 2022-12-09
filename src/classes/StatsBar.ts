@@ -5,7 +5,7 @@ export class StatsBar {
   hp: number;
   points: number;
   // player: Player;
-  energyBarStartWidth: number = 60;
+  energyBarStartWidth: number = 6;
   energyBarStartTransform: number = 0;
 
   statsBarHTML: HTMLDivElement = document.querySelector(
@@ -67,9 +67,13 @@ export class StatsBar {
       if (this.energyBarStartWidth <= 0) {
         // clearInterval(interval);
         // resolve("done");
-        hurtPlayerFunc();
+        Player.playerDeath();
+        setTimeout(() => {
+          hurtPlayerFunc();
+        }, 3000);
         this.energyBarStartWidth = 60;
         this.energyBarStartTransform = 0;
+        // StatsBar.animationEnergyBar();
       }
     }, 500);
   }
@@ -102,7 +106,21 @@ export class StatsBar {
     pointsBarTag.innerHTML = `${0}`;
   }
   resetEnergyBar() {
-    this.energyBarStartWidth = 60;
+    this.energyBarStartWidth = 62;
     this.energyBarStartTransform = 0;
+    this.statsBarHTML;
+  }
+  static animationEnergyBar() {
+    const eneryBarHTML = document.querySelector(
+      "#stats-bar_energy-bar_yellowBg"
+    ) as HTMLDivElement;
+    if (eneryBarHTML.classList.contains("energyBarAnimation")) {
+      eneryBarHTML.classList.remove("energyBarAnimation");
+      setTimeout(() => {
+        eneryBarHTML.classList.add("energyBarAnimation");
+      }, 10);
+    } else {
+      eneryBarHTML.classList.add("energyBarAnimation");
+    }
   }
 }
