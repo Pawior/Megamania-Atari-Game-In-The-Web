@@ -86,6 +86,7 @@ export class Player {
   hurtPlayer() {
     this.statsBar.hp--;
     this.statsBar.updateHealthBar();
+    this.statsBar.renewEnergyBar();
     console.log(this.statsBar);
     resetAliens();
     // setTimeout(() => {

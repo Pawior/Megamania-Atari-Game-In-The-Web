@@ -5,7 +5,7 @@ export class StatsBar {
   hp: number;
   points: number;
   // player: Player;
-  energyBarStartWidth: number = 6;
+  energyBarStartWidth: number = 60;
   energyBarStartTransform: number = 0;
 
   statsBarHTML: HTMLDivElement = document.querySelector(
@@ -71,11 +71,15 @@ export class StatsBar {
         setTimeout(() => {
           hurtPlayerFunc();
         }, 3000);
-        this.energyBarStartWidth = 60;
-        this.energyBarStartTransform = 0;
+        // this.energyBarStartWidth = 60;
+        // this.energyBarStartTransform = 0;
         // StatsBar.animationEnergyBar();
       }
     }, 500);
+  }
+  renewEnergyBar() {
+    this.energyBarStartWidth = 60;
+    this.energyBarStartTransform = 0;
   }
   addPoints() {
     let pointsBarTag: HTMLElement = document.querySelector(

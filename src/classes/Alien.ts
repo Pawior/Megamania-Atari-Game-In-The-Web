@@ -1,3 +1,6 @@
+import { Bullet } from "./Bullet";
+import { StatsBar } from "./StatsBar";
+
 export class Alien {
   alienHTML: HTMLDivElement;
   bgImage: any;
@@ -131,6 +134,98 @@ export class Alien {
         this.alienHTML.style.left = `${left}vw`;
       }
     }, 1000 / 24);
+  }
+  bugsMove() {
+    let moveHorizontalStep: number = 0;
+    let style = window.getComputedStyle(this.alienHTML);
+    console.log(this.alienHTML.style.left);
+    let left = parseInt(this.alienHTML.style.left.replace(/\D/g, ""));
+
+    let slowMoveIncrement: number = 2;
+    let fastMoveIncrement: number = 4;
+    let windowMove = window.innerWidth;
+
+    const checkMaxIncrement = () => {
+      if (left > 100) {
+        left = -5;
+      }
+    };
+
+    let moveTypes = ["stay", "slow", "fast"];
+
+    // let randMoveType = Math.floor(Math.random() * 3);
+    let randMoveType: number;
+
+    function timeout(ms: number) {
+      return new Promise((res) => setTimeout(res, ms));
+    }
+    const changeMove = async (newMove: number) => {
+      // $('#q').append('first <br>');
+      randMoveType = newMove;
+      console.log("robi sie");
+    };
+
+    function second() {
+      // $('#q').append('second <br>');
+      console.log("second");
+    }
+
+    function third() {
+      // $('#q').append('third <br>');
+      console.log("third");
+    }
+
+    const moveOrders = async () => {
+      await changeMove(0);
+      await timeout(3000);
+      await changeMove(1);
+      await timeout(3000);
+      await changeMove(2);
+      await timeout(3000);
+    };
+    moveOrders();
+    setInterval(() => {
+      moveOrders();
+
+      // randMoveType = Math.floor(Math.random() * 3);
+    }, 9100);
+    this.intervalMove = setInterval(() => {
+      if (this.canMove) {
+        switch (randMoveType) {
+          case 0:
+            left += slowMoveIncrement;
+            break;
+          case 1:
+            left += fastMoveIncrement;
+            break;
+          case 2:
+            left += 0;
+            break;
+          default:
+            console.log("nie ma takiej opcji robaki");
+        }
+
+        if (document.body.contains(this.alienHTML)) {
+          // console.log("jest html");
+        } else {
+          // console.log("nie ma html wdomu");
+          clearInterval(this.intervalMove);
+        }
+        checkMaxIncrement();
+        this.alienHTML.style.left = `${left}vw`;
+      }
+    }, 1000 / 10);
+  }
+  turnShooting() {
+    // console.log(spamBullet);
+    setInterval(() => {
+      let statsBar = new StatsBar();
+      let bulletClass = new Bullet(statsBar);
+      bulletClass.spawnAlienBullet(this.alienHTML);
+    }, 3000);
+    // setTimeout(() => {
+    //   spamBullet = true;
+    // }, 250);
   }
   checkAlienHtmlExistence(elem: HTMLDivElement) {
     var in_dom = document.body.contains(elem);

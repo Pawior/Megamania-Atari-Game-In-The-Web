@@ -14,15 +14,15 @@ export const ManageAliens = (): void => {
   //     console.log(alien);
   //   }
   // };
-
   // const moveAliens = (): void => {
   //   aliensArr.forEach((alien: Alien) => {
   //     alien.standardMove();
   //   });
   // };
   // moveAliens();
-
-  spawnBurgers();
+  // spawnBurgers();
+  // spawnBugs();
+  spawnDiscs();
 };
 
 export const spawnDiscs = (): void => {
@@ -62,9 +62,42 @@ export const spawnBurgers = (): void => {
       }
     }
   };
+
   const moveAliens = (): void => {
     aliensArr.forEach((alien: Alien) => {
       alien.hamburgerMove();
+    });
+  };
+  spawnAliens();
+  moveAliens();
+  console.log(aliensArr);
+};
+
+export const spawnBugs = (): void => {
+  currEnemyType = "bugs";
+  let aliensAmount: number = 8;
+  console.log("spawn burgerów");
+
+  const spawnAliens = (): void => {
+    for (let i = 1; i <= aliensAmount / 2; i++) {
+      let ctr = 2;
+      for (let j = 1; j < 4; j++) {
+        ctr += 2;
+        console.log("robie aliena");
+        let alien = new Alien("enemyBugs.gif", i * (7 + ctr), j * 8);
+        aliensArr.push(alien);
+        if (j == 3) {
+          alien.turnShooting();
+        }
+        alien.spawnAlien();
+        console.log(alien);
+      }
+    }
+  };
+
+  const moveAliens = (): void => {
+    aliensArr.forEach((alien: Alien) => {
+      alien.bugsMove();
     });
   };
   spawnAliens();
@@ -103,6 +136,9 @@ export const resetAliens = (): void => {
         case "burgers":
           alien.hamburgerMove();
           break;
+        case "bugs":
+          alien.bugsMove();
+          break;
       }
     });
   };
@@ -121,11 +157,15 @@ export const goToNextWave = () => {
   console.log(aliensArr);
   switch (currEnemyType) {
     case "discs":
-      spawnBurgers();
+      spawnBugs();
       break;
     case "burgers":
       spawnDiscs();
       break;
+    case "bugs":
+      spawnBurgers();
+      break;
+
     default:
       console.log("no respawn");
   }
