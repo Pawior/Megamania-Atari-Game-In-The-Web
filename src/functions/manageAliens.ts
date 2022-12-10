@@ -27,7 +27,7 @@ export const ManageAliens = (): void => {
 
 export const spawnDiscs = (): void => {
   currEnemyType = "discs";
-  let aliensAmount: number = 1;
+  let aliensAmount: number = 18;
   console.log("spawn disców");
 
   for (let i = 0; i < aliensAmount; i++) {
@@ -48,7 +48,7 @@ export const spawnDiscs = (): void => {
 
 export const spawnBurgers = (): void => {
   currEnemyType = "burgers";
-  let aliensAmount: number = 3;
+  let aliensAmount: number = 26;
   console.log("spawn burgerów");
 
   const spawnAliens = (): void => {
@@ -75,7 +75,7 @@ export const spawnBurgers = (): void => {
 
 export const spawnBugs = (): void => {
   currEnemyType = "bugs";
-  let aliensAmount: number = 8;
+  let aliensAmount: number = 15;
   console.log("spawn burgerów");
 
   const spawnAliens = (): void => {
@@ -86,9 +86,9 @@ export const spawnBugs = (): void => {
         console.log("robie aliena");
         let alien = new Alien("enemyBugs.gif", i * (7 + ctr), j * 8);
         aliensArr.push(alien);
-        if (j == 3) {
-          alien.turnShooting();
-        }
+        alien.turnShooting();
+        // if (j == 3) {
+        // }
         alien.spawnAlien();
         console.log(alien);
       }

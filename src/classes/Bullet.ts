@@ -17,7 +17,11 @@ export class Bullet {
   constructor(statsBar: StatsBar) {
     this.statsBar = statsBar;
   }
-  spawnAlienBullet(alienHTML: HTMLDivElement) {
+  spawnAlienBullet(
+    alienHTML: HTMLDivElement,
+    leftProp: string,
+    topProp: string
+  ) {
     const bulletZone: HTMLDivElement = document.querySelector(
       "#bullet-zone"
     ) as HTMLDivElement;
@@ -33,9 +37,12 @@ export class Bullet {
     let style = window.getComputedStyle(alienHTML);
     let left = parseInt(style.getPropertyValue("left"));
     left -= 10;
-    this.bulletHTML.style.setProperty("left", `calc(50% + ${left}px)`);
-    alienHTML.appendChild(this.bulletHTML);
+    this.bulletHTML.style.setProperty("left", `calc(50% + ${left}px)a`);
 
+    alienHTML.appendChild(this.bulletHTML);
+    console.log("alien bullet");
+    console.log(leftProp);
+    console.log(topProp);
     let bulletShootInterval = setInterval(() => {
       bulletBotProp -= 3;
       // console.log("aliensArr");

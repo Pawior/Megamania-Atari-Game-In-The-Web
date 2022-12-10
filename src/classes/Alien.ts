@@ -141,8 +141,8 @@ export class Alien {
     console.log(this.alienHTML.style.left);
     let left = parseInt(this.alienHTML.style.left.replace(/\D/g, ""));
 
-    let slowMoveIncrement: number = 2;
-    let fastMoveIncrement: number = 4;
+    let slowMoveIncrement: number = 0.8;
+    let fastMoveIncrement: number = 2;
     let windowMove = window.innerWidth;
 
     const checkMaxIncrement = () => {
@@ -214,14 +214,23 @@ export class Alien {
         checkMaxIncrement();
         this.alienHTML.style.left = `${left}vw`;
       }
-    }, 1000 / 10);
+    }, 1000 / 24);
   }
   turnShooting() {
     // console.log(spamBullet);
     setInterval(() => {
-      let statsBar = new StatsBar();
-      let bulletClass = new Bullet(statsBar);
-      bulletClass.spawnAlienBullet(this.alienHTML);
+      let randomShoot = Math.random() * 100;
+      if (randomShoot < 40) {
+        let statsBar = new StatsBar();
+        let bulletClass = new Bullet(statsBar);
+        bulletClass.spawnAlienBullet(
+          this.alienHTML,
+          this.alienHTML.style.left,
+          this.alienHTML.style.top
+        );
+      }
+      //   this.alienHTML.style.left = this.startLeft + "vw";
+      // this.alienHTML.style.top = this.startHeight + "vh";
     }, 3000);
     // setTimeout(() => {
     //   spamBullet = true;

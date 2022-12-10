@@ -49,16 +49,18 @@ export class Player {
 
     let spamBullet = true;
     document.addEventListener("keyup", (event: KeyboardEvent) => {
-      let keyCode = event.code;
-      if (keyCode == "Space" && spamBullet) {
-        spamBullet = false;
-        console.log(spamBullet);
-        let bulletClass = new Bullet(this.statsBar);
-        bulletClass.spawnBullet(this.playerHTML);
-        setTimeout(() => {
-          spamBullet = true;
-        }, 250);
-        // bulletClass.checkCollision();
+      if (Player.canMove) {
+        let keyCode = event.code;
+        if (keyCode == "Space" && spamBullet) {
+          spamBullet = false;
+          console.log(spamBullet);
+          let bulletClass = new Bullet(this.statsBar);
+          bulletClass.spawnBullet(this.playerHTML);
+          setTimeout(() => {
+            spamBullet = true;
+          }, 250);
+          // bulletClass.checkCollision();
+        }
       }
     });
   }
