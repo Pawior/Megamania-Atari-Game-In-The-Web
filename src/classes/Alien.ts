@@ -46,7 +46,7 @@ export class Alien {
       this.canMove = true;
     }, 3000);
   }
-  standardMove() {
+  discMove() {
     let moveHorizontalStep: number = 0;
     let moveVerticalStep: number = 0;
     let style = window.getComputedStyle(this.alienHTML);

@@ -45,7 +45,7 @@ export const spawnDiscs = (): void => {
   }
   const moveAliens = (): void => {
     aliensArr.forEach((alien: Alien) => {
-      alien.standardMove();
+      alien.discMove();
     });
   };
   moveAliens();
@@ -137,7 +137,7 @@ export const resetAliens = (): void => {
       console.log("przemieszczam");
       switch (currEnemyType) {
         case "discs":
-          alien.standardMove();
+          alien.discMove();
           break;
         case "burgers":
           alien.hamburgerMove();
