@@ -50,16 +50,21 @@ export class Alien {
     let moveHorizontalStep: number = 0;
     let moveVerticalStep: number = 0;
     let style = window.getComputedStyle(this.alienHTML);
-    let left = parseInt(style.getPropertyValue("left"));
-    let top = parseInt(style.getPropertyValue("top"));
+    // let left = parseInt(style.getPropertyValue("left"));
+    // let top = parseInt(style.getPropertyValue("top"));
+    let left = parseInt(this.alienHTML.style.left.replace(/\D/g, ""));
+    let top = parseInt(this.alienHTML.style.top.replace(/\D/g, ""));
+    console.log("standardMove");
+    console.log(top);
+    console.log(left);
     // let incrementorHorizontalSum: number = 0;
     let incrementorHorizontal: number = 1;
-    let incrementorVertical: number = 1;
+    let incrementorVertical: number = 0.2;
 
     const checkMaxIncrement = () => {
-      if (moveHorizontalStep > 30) {
+      if (moveHorizontalStep > 10) {
         incrementorHorizontal = -1;
-      } else if (moveHorizontalStep < -30) {
+      } else if (moveHorizontalStep < -40) {
         incrementorHorizontal = 1;
       }
 

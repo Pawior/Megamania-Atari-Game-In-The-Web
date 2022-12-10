@@ -27,15 +27,21 @@ export const ManageAliens = (): void => {
 
 export const spawnDiscs = (): void => {
   currEnemyType = "discs";
-  let aliensAmount: number = 18;
+  let aliensAmount: number = 7;
   console.log("spawn disców");
 
-  for (let i = 0; i < aliensAmount; i++) {
-    console.log("robie aliena");
-    let alien = new Alien("enemyDisc.gif", i * 1, 3);
-    aliensArr.push(alien);
-    alien.spawnAlien();
-    console.log(alien);
+  let ctr = 0;
+  for (let i = 1; i < aliensAmount / 2; i++) {
+    for (let j = 1; j < 5; j++) {
+      console.log("robie aliena");
+      let height = j * 10;
+      height -= 30;
+      let alien = new Alien("enemyDisc.gif", ctr * 2, height);
+      aliensArr.push(alien);
+      alien.spawnAlien();
+      console.log(alien);
+      ctr += 5;
+    }
   }
   const moveAliens = (): void => {
     aliensArr.forEach((alien: Alien) => {

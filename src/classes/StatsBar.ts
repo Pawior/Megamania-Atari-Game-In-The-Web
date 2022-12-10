@@ -96,8 +96,11 @@ export class StatsBar {
       case "discs":
         pointsToAdd = 60;
         break;
+      case "bugs":
+        pointsToAdd = 90;
+        break;
       default:
-        pointsToAdd = 20;
+        pointsToAdd = 40;
     }
 
     let newPoints = (pointsCurrentText += pointsToAdd);
