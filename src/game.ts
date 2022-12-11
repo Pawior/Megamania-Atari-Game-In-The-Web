@@ -7,22 +7,22 @@ let player: Player;
 export const Game = () => {
   let intro = document.querySelector("#intro") as HTMLDivElement;
   let discoColor: number = 0;
-  // showIntro(intro, discoColor);
-  // setTimeout(() => {
-  intro.remove();
-  // openInstruction();
-  console.log("start the game");
-  // let alien = new Alien("img", 100);
-  // alien.spawnAlien();
-  // player.spawnPlayer();
-  player = new Player();
-  player.initialize();
-  player.shooting();
-  // let statsBar = new StatsBar(player);
-  // statsBar.spawnStatsBar();
-  ManageAliens();
-  // CollisonChecker();
-  // }, 5000);
+  showIntro(intro, discoColor);
+  setTimeout(() => {
+    intro.remove();
+    openInstruction();
+    console.log("start the game");
+    // let alien = new Alien("img", 100);
+    // alien.spawnAlien();
+    // player.spawnPlayer();
+    player = new Player();
+    player.initialize();
+    player.shooting();
+    // let statsBar = new StatsBar(player);
+    // statsBar.spawnStatsBar();
+    ManageAliens();
+    // CollisonChecker();
+  }, 5000);
 };
 const showIntro = (intro: HTMLDivElement, discoColor: number) => {
   discoColor = setInterval(() => {
@@ -32,7 +32,7 @@ const showIntro = (intro: HTMLDivElement, discoColor: number) => {
     let randBright = Math.random();
     intro.style.filter = `brightness(${randBright}) hue-rotate(${randColor}deg)`;
     // playerHtmlTag.style.filter = `brightness(${randBright})`;
-  }, 340);
+  }, 200);
   console.log("intro");
 };
 const openInstruction = () => {

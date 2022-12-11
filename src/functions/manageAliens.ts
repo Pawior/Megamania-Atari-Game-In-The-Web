@@ -20,9 +20,9 @@ export const ManageAliens = (): void => {
   //   });
   // };
   // moveAliens();
-  // spawnBurgers();
+  spawnBurgers();
   // spawnBugs();
-  spawnDiscs();
+  // spawnDiscs();
 };
 
 export const spawnDiscs = (): void => {
