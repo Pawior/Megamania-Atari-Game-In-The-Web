@@ -50,6 +50,11 @@ export class Player {
     let spamBullet = true;
     document.addEventListener("keyup", (event: KeyboardEvent) => {
       if (Player.canMove) {
+        let blasterSound: HTMLAudioElement = new Audio(
+          "../../sounds/blaster.mp3"
+        );
+        blasterSound.volume = 0.1;
+        blasterSound.play();
         let keyCode = event.code;
         if (keyCode == "Space" && spamBullet) {
           spamBullet = false;
@@ -162,23 +167,25 @@ export class Player {
   manageEnergyBar() {
     this.statsBar.manageEnergyBar(this.hurtPlayer.bind(this));
   }
-  // changeMove(){
-  //   this.canMove = false;
-  // }
+
   static playerDeath() {
     console.log("Player umarł");
     const playerHtmlTag = document.querySelector("#player") as HTMLDivElement;
     let discoColor = setInterval(() => {
       console.log("umiera player");
-      // let randColor = colors[Math.floor(Math.random() * colors.length)];
       let randColor = Math.floor(Math.random() * 1000);
       let randBright = Math.random();
       playerHtmlTag.style.filter = `brightness(${randBright}) hue-rotate(${randColor}deg)`;
-      // playerHtmlTag.style.filter = `brightness(${randBright})`;
     }, 140);
     stopMove();
     Player.canMove = false;
     StatsBar.animationEnergyBar();
+    // Audio:
+    let explosionSound: HTMLAudioElement = new Audio(
+      "../../sounds/systemBreakDown.wav"
+    );
+    explosionSound.volume = 0.1;
+    explosionSound.play();
 
     setTimeout(() => {
       clearInterval(discoColor);
