@@ -26,14 +26,12 @@ export const Game = () => {
 };
 const showIntro = (intro: HTMLDivElement, discoColor: number) => {
   discoColor = setInterval(() => {
-    console.log("umiera player");
     // let randColor = colors[Math.floor(Math.random() * colors.length)];
     let randColor = Math.floor(Math.random() * 1000);
     let randBright = Math.random();
     intro.style.filter = `brightness(${randBright}) hue-rotate(${randColor}deg)`;
     // playerHtmlTag.style.filter = `brightness(${randBright})`;
   }, 200);
-  console.log("intro");
 };
 const openInstruction = () => {
   const modal: HTMLElement = document.querySelector(".modal") as HTMLElement;

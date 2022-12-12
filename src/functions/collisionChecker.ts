@@ -63,8 +63,10 @@ export const CollisonChecker = (passedDiv: HTMLDivElement): any => {
   return collisionToReturn;
 };
 
+let isPlayerDying = false;
 export const PlayerCollisonChecker = (passedDiv: HTMLDivElement): any => {
   // console.log(aliensArr);
+
   let collisionToReturn: any = {
     hit: false,
     enemyType: "hamburger",
@@ -106,20 +108,29 @@ export const PlayerCollisonChecker = (passedDiv: HTMLDivElement): any => {
   }
 
   if (horizontalMatch && verticalMatch) {
-    console.log(passedDiv);
-    console.log("Kolizja z graczem");
-    console.log(player);
-    Player.playerDeath();
-    player.hurtPlayer();
-    //   let intersect = true;
+    if (isPlayerDying) {
+    } else {
+      console.log(passedDiv);
+      console.log("Kolizja z graczem");
+      console.log(player);
+      Player.playerDeath();
+      player.hurtPlayer();
+      //   let intersect = true;
 
-    // if (passedDiv.className == "bullet") {
-    //   alien.alienHTML.remove();
-    //   aliensArr.splice(idx, 1);
-    //   //  resToReturn;
-    // }
-    console.log("kolizja!!! Juhu");
-    collisionToReturn.hit = true;
+      // if (passedDiv.className == "bullet") {
+      //   alien.alienHTML.remove();
+      //   aliensArr.splice(idx, 1);
+      //   //  resToReturn;
+      // }
+      console.log("kolizja!!! Juhu");
+      collisionToReturn.hit = true;
+      console.log(isPlayerDying);
+      isPlayerDying = true;
+      console.log(isPlayerDying);
+      setTimeout(() => {
+        isPlayerDying = false;
+      }, 5000);
+    }
   }
 
   return collisionToReturn;

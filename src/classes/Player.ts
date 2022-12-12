@@ -50,13 +50,13 @@ export class Player {
     let spamBullet = true;
     document.addEventListener("keyup", (event: KeyboardEvent) => {
       if (Player.canMove) {
-        let blasterSound: HTMLAudioElement = new Audio(
-          "../../sounds/blaster.mp3"
-        );
-        blasterSound.volume = 0.1;
-        blasterSound.play();
         let keyCode = event.code;
         if (keyCode == "Space" && spamBullet) {
+          let blasterSound: HTMLAudioElement = new Audio(
+            "../../sounds/blaster.mp3"
+          );
+          blasterSound.volume = 0.1;
+          blasterSound.play();
           spamBullet = false;
           console.log(spamBullet);
           let bulletClass = new Bullet(this.statsBar);
