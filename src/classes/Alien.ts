@@ -49,9 +49,6 @@ export class Alien {
   discMove() {
     let moveHorizontalStep: number = 0;
     let moveVerticalStep: number = 0;
-    let style = window.getComputedStyle(this.alienHTML);
-    // let left = parseInt(style.getPropertyValue("left"));
-    // let top = parseInt(style.getPropertyValue("top"));
     let left = parseInt(this.alienHTML.style.left.replace(/\D/g, ""));
     let top = parseInt(this.alienHTML.style.top.replace(/\D/g, ""));
     console.log("standardMove");
@@ -94,8 +91,6 @@ export class Alien {
     }, 1000 / 24);
   }
   hamburgerMove() {
-    let moveHorizontalStep: number = 0;
-    let style = window.getComputedStyle(this.alienHTML);
     // let left = parseInt(style.getPropertyValue("left"));
     console.log(this.alienHTML.style.left);
     let left = parseInt(this.alienHTML.style.left.replace(/\D/g, ""));
@@ -103,8 +98,6 @@ export class Alien {
     // myString = myString.replace(/\D/g,'');
     // let incrementorHorizontalSum: number = 0;
     let incrementorHorizontal: number = 1;
-    let incrementorVertical: number = 1;
-    let windowMove = window.innerWidth;
 
     const checkMaxIncrement = () => {
       // let left = parseInt(style.getPropertyValue("left"));
@@ -141,22 +134,17 @@ export class Alien {
     }, 1000 / 24);
   }
   bugsMove() {
-    let moveHorizontalStep: number = 0;
-    let style = window.getComputedStyle(this.alienHTML);
     console.log(this.alienHTML.style.left);
     let left = parseInt(this.alienHTML.style.left.replace(/\D/g, ""));
 
     let slowMoveIncrement: number = 0.8;
     let fastMoveIncrement: number = 2;
-    let windowMove = window.innerWidth;
 
     const checkMaxIncrement = () => {
       if (left > 100) {
         left = -5;
       }
     };
-
-    let moveTypes = ["stay", "slow", "fast"];
 
     // let randMoveType = Math.floor(Math.random() * 3);
     let randMoveType: number;
@@ -169,16 +157,6 @@ export class Alien {
       randMoveType = newMove;
       console.log("robi sie");
     };
-
-    function second() {
-      // $('#q').append('second <br>');
-      console.log("second");
-    }
-
-    function third() {
-      // $('#q').append('third <br>');
-      console.log("third");
-    }
 
     const moveOrders = async () => {
       await changeMove(0);
@@ -243,7 +221,7 @@ export class Alien {
   }
   checkAlienHtmlExistence(elem: HTMLDivElement) {
     var in_dom = document.body.contains(elem);
-    var observer = new MutationObserver((mutations) => {
+    var observer = new MutationObserver(() => {
       if (document.body.contains(elem)) {
         if (!in_dom) {
           console.log("element inserted");

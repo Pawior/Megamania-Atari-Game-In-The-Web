@@ -6,7 +6,6 @@ import {
   hardResetAliens,
   stopMove,
 } from "../functions/manageAliens";
-import { aliensArr } from "../functions/manageAliens";
 
 export class Player {
   // static playerTag
@@ -38,14 +37,6 @@ export class Player {
   shooting() {
     // console.log(typeof bulletTopProp);
     // bulletLeftProp = 10;
-
-    const gameBoard: HTMLDivElement = document.querySelector(
-      "#game-board"
-    ) as HTMLDivElement;
-
-    const bulletZone: HTMLDivElement = document.querySelector(
-      "#bullet-zone"
-    ) as HTMLDivElement;
 
     let spamBullet = true;
     document.addEventListener("keyup", (event: KeyboardEvent) => {

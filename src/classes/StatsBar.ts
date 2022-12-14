@@ -22,9 +22,6 @@ export class StatsBar {
     // this.player = player;
   }
   spawnStatsBar() {
-    const app: HTMLDivElement = document.querySelector(
-      "#app"
-    ) as HTMLDivElement;
     // let statsBarDiv = document.createElement("div");
     // statsBarDiv.id = "stats-bar";
     // app.appendChild(statsBarDiv);
@@ -41,13 +38,7 @@ export class StatsBar {
     let energyBar: HTMLDivElement = document.querySelector(
       "#stats-bar_energy-bar_yellowBg"
     ) as HTMLDivElement;
-    let energyBarStyle = window.getComputedStyle(energyBar);
 
-    let energyBarWidth: number = parseInt(
-      energyBarStyle.getPropertyValue("width")
-    );
-    let matrixValue = energyBarStyle.getPropertyValue("transform");
-    let matrixArr = matrixValue.split(", ");
     // console.log(matrixValue);
     // console.log(matrixArr);
     // console.log(matrixArr[4]);
@@ -58,7 +49,7 @@ export class StatsBar {
     energyBar: HTMLDivElement,
     hurtPlayerFunc: () => void
   ): void {
-    let interval = setInterval(() => {
+    setInterval(() => {
       // console.log("managuje energy bar");
       this.energyBarStartWidth -= 0.5;
       // this.energyBarStartTransform -= 0.25;

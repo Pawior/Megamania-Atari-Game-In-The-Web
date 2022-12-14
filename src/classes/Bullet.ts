@@ -3,12 +3,7 @@ import {
   PlayerCollisonChecker,
 } from "../functions/collisionChecker";
 import { StatsBar } from "./StatsBar";
-import { currEnemyType } from "../functions/manageAliens";
-import {
-  aliensArr,
-  spawnBurgers,
-  goToNextWave,
-} from "../functions/manageAliens";
+import { aliensArr, goToNextWave } from "../functions/manageAliens";
 
 export class Bullet {
   bulletHTML: HTMLDivElement = document.createElement("div") as HTMLDivElement;
@@ -22,15 +17,7 @@ export class Bullet {
     leftProp: string,
     topProp: string
   ) {
-    const bulletZone: HTMLDivElement = document.querySelector(
-      "#bullet-zone"
-    ) as HTMLDivElement;
-    // const playerHTML
-
     this.bulletHTML.classList.add("bullet");
-
-    let bulletStyle = window.getComputedStyle(this.bulletHTML);
-    let bulletLeft = parseInt(bulletStyle.getPropertyValue("left"));
 
     let bulletBotProp = -2;
 
@@ -78,9 +65,6 @@ export class Bullet {
     // const playerHTML
 
     this.bulletHTML.classList.add("bullet");
-
-    let bulletStyle = window.getComputedStyle(this.bulletHTML);
-    let bulletLeft = parseInt(bulletStyle.getPropertyValue("left"));
 
     let bulletBotProp = -2;
 

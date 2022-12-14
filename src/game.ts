@@ -1,17 +1,14 @@
 import { Player } from "./classes/Player";
-import { StatsBar } from "./classes/StatsBar";
-// import { Alien } from "./classes/Alien";
 import { ManageAliens } from "./functions/manageAliens";
-import { CollisonChecker } from "./functions/collisionChecker";
 let player: Player;
 export const Game = () => {
   let intro = document.querySelector("#intro") as HTMLDivElement;
-  let discoColor: number = 0;
-  showIntro(intro, discoColor);
+  showIntro(intro);
   setTimeout(() => {
     intro.remove();
     openInstruction();
     console.log("start the game");
+    // clearInterval(discoColor);
     // let alien = new Alien("img", 100);
     // alien.spawnAlien();
     // player.spawnPlayer();
@@ -24,8 +21,8 @@ export const Game = () => {
     // CollisonChecker();
   }, 5000);
 };
-const showIntro = (intro: HTMLDivElement, discoColor: number) => {
-  discoColor = setInterval(() => {
+const showIntro = (intro: HTMLDivElement) => {
+  setInterval(() => {
     // let randColor = colors[Math.floor(Math.random() * colors.length)];
     let randColor = Math.floor(Math.random() * 1000);
     let randBright = Math.random();
@@ -35,9 +32,7 @@ const showIntro = (intro: HTMLDivElement, discoColor: number) => {
 };
 const openInstruction = () => {
   const modal: HTMLElement = document.querySelector(".modal") as HTMLElement;
-  const trigger: HTMLElement = document.querySelector(
-    ".trigger"
-  ) as HTMLElement;
+
   const closeButton: HTMLElement = document.querySelector(
     ".close-button"
   ) as HTMLElement;

@@ -2,7 +2,6 @@ import { Alien } from "../classes/Alien";
 import { StatsBar } from "../classes/StatsBar";
 
 let aliensArr: Alien[] = [];
-let currGameLevel = 0;
 export let currEnemyType: string;
 export const ManageAliens = (): void => {
   // const spawnAliens = (): void => {
@@ -20,8 +19,8 @@ export const ManageAliens = (): void => {
   //   });
   // };
   // moveAliens();
-  // spawnBurgers();
-  spawnBugs();
+  spawnBurgers();
+  // spawnBugs();
   // spawnDiscs();
 };
 
@@ -184,8 +183,6 @@ export const stopMove = () => {
     alien.stopMove();
   });
 };
-
-let monitoringI = 0;
 
 // const monitorAliensState = () => {
 //   monitoringI++;
