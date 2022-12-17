@@ -3,6 +3,6 @@ import { ghPages } from "vite-plugin-gh-pages";
 
 /** @type {import('vite').UserConfig} */
 export default {
-  base: "/megamaniaatarigameintheweb/",
+  base: "/Megamania-Atari-Game-In-The-Web/",
   plugins: [ghPages()],
 };
