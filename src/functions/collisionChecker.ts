@@ -47,7 +47,7 @@ export const CollisonChecker = (passedDiv: HTMLDivElement): any => {
 
       if (passedDiv.className == "bullet") {
         let explosionSound: HTMLAudioElement = new Audio(
-          "../../sounds/explosion.wav"
+          "./sounds/explosion.wav"
         );
         explosionSound.volume = 1;
         explosionSound.play();

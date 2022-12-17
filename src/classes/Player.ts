@@ -44,7 +44,7 @@ export class Player {
         let keyCode = event.code;
         if (keyCode == "Space" && spamBullet) {
           let blasterSound: HTMLAudioElement = new Audio(
-            "../../sounds/blaster.mp3"
+            "./sounds/blaster.mp3"
           );
           blasterSound.volume = 0.1;
           blasterSound.play();
@@ -173,7 +173,7 @@ export class Player {
     StatsBar.animationEnergyBar();
     // Audio:
     let explosionSound: HTMLAudioElement = new Audio(
-      "../../sounds/systemBreakDown.wav"
+      "./sounds/systemBreakDown.wav"
     );
     explosionSound.volume = 0.1;
     explosionSound.play();
