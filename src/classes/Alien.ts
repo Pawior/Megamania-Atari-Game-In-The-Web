@@ -26,7 +26,7 @@ export class Alien {
     this.alienHTML.style.top = this.startHeight + "vh";
     console.log(this.bgImage);
     console.log("bg img");
-    this.alienHTML.style.backgroundImage = `url(../enemies/${this.bgImage})`;
+    this.alienHTML.style.backgroundImage = `url(./enemies/${this.bgImage})`;
     gameBoard.appendChild(this.alienHTML);
   }
   respawnAlien() {
